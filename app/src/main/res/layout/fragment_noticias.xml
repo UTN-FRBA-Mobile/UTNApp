@@ -2,11 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mobile20171c.utnapp.NoticiasFragment">
+    tools:context="mobile20171c.utnapp.NoticiasFragment"
+    android:layout_margin="20dp">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView android:id="@+id/recyclerViewNoticias"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_noticias_fragment" />
+        />
 
 </FrameLayout>
