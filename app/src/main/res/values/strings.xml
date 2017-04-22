@@ -24,4 +24,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_noticias_fragment">noticias fragment</string>
+    <string name="hello_calendario_fragment">calendario fragment</string>
+    <string name="hello_configuracion_fragment">configuracion fragment</string>
+    <string name="hello_cursos_fragment">cursos fragment</string>
 </resources>

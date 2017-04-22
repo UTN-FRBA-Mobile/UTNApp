@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, NoticiasFragment.newInstance(), "Fragment")
+                .commit();
     }
 
     @Override
@@ -81,13 +85,21 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.mis_cursos) {
-
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, CursosFragment.newInstance(), "Fragment")
+                    .commit();
         } else if (id == R.id.calendario) {
-
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, CalendarioFragment.newInstance(), "Fragment")
+                    .commit();
         } else if (id == R.id.noticias) {
-
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, NoticiasFragment.newInstance(), "Fragment")
+                    .commit();
         } else if (id == R.id.configuracion) {
-
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, ConfiguracionFragment.newInstance(), "Fragment")
+                    .commit();
         } else if (id == R.id.logout) {
 
         }
