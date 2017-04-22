@@ -49,7 +49,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -87,18 +90,22 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.mis_cursos) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainer, CursosFragment.newInstance(), "Fragment")
+                    .addToBackStack("Cursos")
                     .commit();
         } else if (id == R.id.calendario) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainer, CalendarioFragment.newInstance(), "Fragment")
+                    .addToBackStack("Calendario")
                     .commit();
         } else if (id == R.id.noticias) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainer, NoticiasFragment.newInstance(), "Fragment")
+                    .addToBackStack("Noticias")
                     .commit();
         } else if (id == R.id.configuracion) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainer, ConfiguracionFragment.newInstance(), "Fragment")
+                    .addToBackStack("Configuracion")
                     .commit();
         } else if (id == R.id.logout) {
 
