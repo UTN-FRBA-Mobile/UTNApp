@@ -1,5 +1,6 @@
 package mobile20171c.utnapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -41,6 +42,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private View mProgressView;
     private View mLoginFormView;
 
+
+    private void AbrirMainActivity(){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    setContentView(R.layout.activity_main);
+                    AbrirMainActivity();
                 } else {
                     // User is signed out
                 }
