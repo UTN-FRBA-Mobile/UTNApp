@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "801128271412",
+    "firebase_url": "https://utnapp-9afd8.firebaseio.com",
+    "project_id": "utnapp-9afd8",
+    "storage_bucket": "utnapp-9afd8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801128271412:android:ed3a1f9764a7fd0f",
+        "android_client_info": {
+          "package_name": "mobile20171c.utnapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801128271412-f4qs0lrvfcv6tov14v45vbp1n8hfdd69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqFbVic6EwpMZ0sHETtnLGC7wgoSJCcpQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
