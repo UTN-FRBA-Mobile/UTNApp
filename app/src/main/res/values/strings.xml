@@ -31,4 +31,7 @@
     <string name="hello_configuracion_fragment">configuracion fragment</string>
     <string name="hello_cursos_fragment">cursos fragment</string>
     <string name="auth_failed">Ha fallado la autenticación del usuario</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="usuarioInvalido">Usuario y/o contraseña incorrectos</string>
+    <string name="completarDatos">Debe completar los datos para ingresar</string>
 </resources>

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -78,6 +79,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .build();
 
         findViewById(R.id.btnIngresoGoogle).setOnClickListener(this);
+        findViewById(R.id.btnIngresoMail).setOnClickListener(this);
+        findViewById(R.id.btnRegistroMail).setOnClickListener(this);
     }
 
     @Override
@@ -93,13 +96,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void Ingresar(String email, String password) {
-
-        mAuth.createUserWithEmailAndPassword(email, password)
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
                         if (!task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, R.string.auth_failed,
+                            Toast.makeText(LoginActivity.this, R.string.usuarioInvalido,
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -107,11 +110,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void Crear(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
                         if (!task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
@@ -135,9 +137,28 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onClick(View v) {
+        String email = ((TextView)findViewById(R.id.email)).getText().toString();
+        String password = ((TextView) findViewById(R.id.password)).getText().toString();
+
         switch (v.getId()) {
             case R.id.btnIngresoGoogle:
                 IngresarConGoogle();
+                break;
+            case R.id.btnIngresoMail:
+                if(!email.isEmpty() && !password.isEmpty()){
+                    Ingresar(email,password);
+                } else {
+                    Toast.makeText(LoginActivity.this, R.string.completarDatos,
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.btnRegistroMail:
+                if(!email.isEmpty() && !password.isEmpty()){
+                    Crear(email,password);
+                } else {
+                    Toast.makeText(LoginActivity.this, R.string.completarDatos,
+                            Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }

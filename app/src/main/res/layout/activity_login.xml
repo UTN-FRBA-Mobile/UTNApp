@@ -63,14 +63,32 @@
 
             </android.support.design.widget.TextInputLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/btnIngresoMail"
                 style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_weight="0.5"/>
+
+            <Button
+                android:id="@+id/btnRegistroMail"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/registrarse"
+                android:textStyle="bold"
+                android:layout_weight="0.5"/>
+            </LinearLayout>
 
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/btnIngresoGoogle"
