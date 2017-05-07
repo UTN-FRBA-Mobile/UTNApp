@@ -1,13 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mobile20171c.utnapp.CursosFragment">
+    tools:context="mobile20171c.utnapp.CursosFragment"
+    android:orientation="vertical"
+    android:layout_margin="20dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_cursos_fragment" />
+        android:layout_weight="0"
+        android:text="@string/hello_cursos_fragment"
+        style="@style/AppTheme.Title"
+        />
 
-</FrameLayout>
+    <android.support.v7.widget.RecyclerView android:id="@+id/recyclerViewCursos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+</LinearLayout>
+

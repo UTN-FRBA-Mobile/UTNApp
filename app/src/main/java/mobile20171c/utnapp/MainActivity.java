@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, NoticiasFragment.newInstance(), "Fragment")
+                .replace(R.id.fragmentContainer, CursosFragment.newInstance(), "Fragment")
                 .commit();
     }
 

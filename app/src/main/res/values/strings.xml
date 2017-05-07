@@ -29,7 +29,7 @@
     <string name="hello_noticias_fragment">noticias fragment</string>
     <string name="hello_calendario_fragment">calendario fragment</string>
     <string name="hello_configuracion_fragment">configuracion fragment</string>
-    <string name="hello_cursos_fragment">cursos fragment</string>
+    <string name="hello_cursos_fragment">Mis Cursos</string>
     <string name="auth_failed">Ha fallado la autenticación del usuario</string>
     <string name="registrarse">Registrarse</string>
     <string name="usuarioInvalido">Usuario y/o contraseña incorrectos</string>
