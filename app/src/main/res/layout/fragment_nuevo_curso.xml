@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mobile20171c.utnapp.CursoFragment"
+    android:orientation="vertical"
+    android:layout_margin="20dp">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Materia"
+        style="@style/AppTheme.FormLabel"
+        />
+
+    <Spinner
+        android:entries="@array/materias"
+        style="@style/AppTheme.FormElement"></Spinner>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Sede"
+        style="@style/AppTheme.FormLabel"
+        />
+
+    <Spinner
+        android:entries="@array/sedes"
+        style="@style/AppTheme.FormElement"></Spinner>
+
+    <!--Datos de contacto del profesor-->
+
+    <!--Horario-->
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Aula"
+        style="@style/AppTheme.FormLabel"
+        />
+
+    <EditText
+        style="@style/AppTheme.FormElement" />
+
+    <Button
+        android:id="@+id/buttonCrearCurso"
+        android:layout_height="wrap_content"
+        android:text="Crear Curso"
+        android:onClick="crearCurso"
+        android:layout_width="fill_parent">
+    </Button>
+
+</LinearLayout>
+

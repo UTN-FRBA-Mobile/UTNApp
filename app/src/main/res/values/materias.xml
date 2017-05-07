@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="materias">
+    <item>Álgebra y Geometría Analítica</item>
+    <item>Algoritmos y Estructuras de Datos</item>
+    <item>Análisis Matemático I</item>
+    <item>Análisis Matemático II</item>
+    <item>Arquitectura de Computadoras</item>
+    <item>Física I</item>
+    <item>Ingeniería y Sociedad</item>
+    <item>Legislación</item>
+    <item>Matemática Discreta</item>
+    <item>Química (Sistemas)</item>
+    <item>Química General</item>
+    <item>Sistemas de Representación</item>
+    <item>Sistemas y Organizaciones</item>
+    <item>Análisis de Sistemas</item>
+    <item>Física (Sistemas)</item>
+    <item>Física II</item>
+    <item>Inglés I</item>
+    <item>Inglés II</item>
+    <item>Paradigmas de Programación</item>
+    <item>Probabilidad y Estadística</item>
+    <item>Sintaxis y Semántica de los Lenguajes</item>
+    <item>Sistemas Operativos</item>
+    <item>Algoritmos Complejos para Estructuras de Datos Avanzadas</item>
+    <item>Comunicaciones</item>
+    <item>Comunicaciones y Redes</item>
+    <item>Creatividad</item>
+    <item>Diseño de Sistemas</item>
+    <item>Economía</item>
+    <item>Gestión de Datos</item>
+    <item>Gestión de Recursos Humanos</item>
+    <item>Innovación Tecnológica</item>
+    <item>Investigación Tecnológica</item>
+    <item>Matemática Superior</item>
+    <item>Metodología de la Conducción de Equipos de Trabajo</item>
+    <item>Modelos Numéricos</item>
+    <item>Redes de Información</item>
+    <item>Seguridad Informática</item>
+    <item>Técnicas Avanzadas de Programación</item>
+    <item>Técnicas de Gráficos por Computadoras</item>
+    <item>Administración de Personal</item>
+    <item>Administración de Recursos</item>
+    <item>Criptografía</item>
+    <item>Emprendimientos Digitales</item>
+    <item>Gerenciamiento de Proyectos Informáticos</item>
+    <item>Informática Industrial</item>
+    <item>Ingeniería de Requisitos</item>
+    <item>Ingeniería de Software</item>
+    <item>Introducción a la Ingeniería de Software</item>
+    <item>Investigación operativa (Sistemas)</item>
+    <item>Programación de la Producción Industrial</item>
+    <item>Seguridad en Redes</item>
+    <item>Simulación (Sistemas)</item>
+    <item>Sistemas de Gestión I</item>
+    <item>Sistemas de Información Geográfica</item>
+    <item>Sistemas Distribuidos</item>
+    <item>Tecnologías Avanzadas en la Construcción de Software</item>
+    <item>Teoría de Control</item>
+    <item> Sistemas Embebidos Aplicados a Robótica</item>
+    <item>Administración Gerencial</item>
+    <item>Arquitecturas de Proyectos en TI</item>
+    <item>Aspectos Legales de las Nuevas Tecnologías de la Información</item>
+    <item>Bioinformática </item>
+    <item>Ciudades Digitales, Gobierno y Sociedad</item>
+    <item>Comunicación y Comercialización de Productos y Servicios de IT</item>
+    <item>Desarrollo de Aplicaciones para Dispositivos Moviles</item>
+    <item>Desarrollo Emprendedor</item>
+    <item>Financiamiento de Proyectos de Internet</item>
+    <item>Flujo de Materiales Industriales</item>
+    <item>Gestión del Cambio Organizacional</item>
+    <item>Implementación de Arquitecturas de Software Concurrente</item>
+    <item>Implementación de Bases de datos NoSQL</item>
+    <item>Infraestructura y Virtualización</item>
+    <item>Inteligencia Artificial</item>
+    <item>Inteligencia Artificial Avanzada</item>
+    <item>Inteligencia de Negocios</item>
+    <item>Marcos de Referencia en TI</item>
+    <item>Marketing en Internet y Nueva Economía</item>
+    <item>Modelos de Negocios en Internet</item>
+    <item>Modelos Organizacionales</item>
+    <item>Pericias Informáticas</item>
+    <item>Procesamiento de Señales</item>
+    <item>Proyecto (Sistemas)</item>
+    <item>Seguridad en Aplicaciones Web</item>
+    <item>Sistemas Avanzados de Bases de Datos</item>
+    <item>Sistemas de Costos y Presupuestos</item>
+    <item>Sistemas de Gestión</item>
+    <item>Sistemas de Gestión II</item>
+    <item>Sistemas Integrados de Gestión (Sistemas)</item>
+    <item>Sistemas Mainframe</item>
+    <item>Tecnología y Discapacidad</item>
+    <item>Tecnologías Aplicadas a Soluciones de Datos</item>
+    <item>Tecnologías Avanzadas en Redes </item>
+    <item>Tecnologías Para la Explotación de Información</item>
+</string-array>
+<string-array name="sedes">
+    <item>Medrano</item>
+    <item>Campus</item>
+</string-array>
+</resources>

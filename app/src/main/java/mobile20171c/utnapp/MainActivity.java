@@ -1,5 +1,6 @@
 package mobile20171c.utnapp;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,7 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, android.support.v4.app.FragmentManager.OnBackStackChangedListener {
 
     private FirebaseAuth mAuth;
 
@@ -38,15 +41,6 @@ public class MainActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -56,9 +50,32 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
+
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer, CursosFragment.newInstance(), "Fragment")
                 .commit();
+    }
+
+    public void onBackStackChanged() {
+
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            String fragmentTag = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName();
+            Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+
+            if (currentFragment instanceof getAppTitleListener) {
+                setTitle(((getAppTitleListener) currentFragment).getAppTitle());
+            } else {
+                setTitle(fragmentTag);
+            }
+        } else {
+            setTitle("UTN App");
+        }
+
+    }
+
+    public interface getAppTitleListener {
+        public String getAppTitle();
     }
 
     @Override

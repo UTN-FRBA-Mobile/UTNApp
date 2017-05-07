@@ -2,6 +2,8 @@ package mobile20171c.utnapp;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +37,18 @@ public class CursosFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainer, NuevoCursoFragment.newInstance(), "Fragment")
+                        .addToBackStack("Nuevo Curso")
+                        .commit();
+            }
+        });
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewCursos);
         recyclerView.setAdapter(new CursosRecyclerAdapter(getContext()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

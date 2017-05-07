@@ -4,4 +4,5 @@
     <color name="colorPrimaryLight">#c82647</color>
     <color name="colorPrimaryDark">#6b0c1f</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="tabBackground">#DDD</color>
 </resources>

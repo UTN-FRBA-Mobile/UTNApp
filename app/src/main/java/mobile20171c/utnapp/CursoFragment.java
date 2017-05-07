@@ -15,7 +15,7 @@ import android.widget.TextView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CursoFragment extends Fragment {
+public class CursoFragment extends Fragment implements MainActivity.getAppTitleListener {
 
     //private RecyclerView recyclerView;
 
@@ -53,6 +53,10 @@ public class CursoFragment extends Fragment {
 
         TextView textView = (TextView) view.findViewById(R.id.cursoName);
         textView.setText("Curso "+String.valueOf(getArguments().get("cursoId")));
+    }
+
+    public String getAppTitle() {
+        return "Materia: "+String.valueOf(getArguments().get("cursoId"));
     }
 
 }
