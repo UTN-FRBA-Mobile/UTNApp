@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import Dominio.modelo.Curso;
+import Dominio.repositorios.RepositorioCursos;
+
 public class CursosRecyclerAdapter extends RecyclerView.Adapter<CursosRecyclerAdapter.ViewHolder> {
 
     private LayoutInflater layoutInflater;
-    private ArrayList<String> cursos;
+    private ArrayList<Curso> cursos;
     private FragmentManager fragmentManager;
 
     public CursosRecyclerAdapter(Context context) {
@@ -36,8 +39,7 @@ public class CursosRecyclerAdapter extends RecyclerView.Adapter<CursosRecyclerAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.nombreCurso.setText(String.valueOf(position+1) + ". " + cursos.get(position));
-
+        holder.nombreCurso.setText(cursos.get(position).materia);
         holder.nombreCurso.setOnClickListener(new OnCursoClickListener(fragmentManager, position));
     }
 
@@ -63,7 +65,6 @@ public class CursosRecyclerAdapter extends RecyclerView.Adapter<CursosRecyclerAd
                     .addToBackStack("Curso")
                     .commit();
         }
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -76,18 +77,7 @@ public class CursosRecyclerAdapter extends RecyclerView.Adapter<CursosRecyclerAd
         }
     }
 
-    /**
-     * TODO: obtener los datos de Firebase
-     */
-    private ArrayList<String> getCursos() {
-        ArrayList<String> staticCursos = new ArrayList<String>();
-
-        staticCursos.add("Analisis Matematico II");
-        staticCursos.add("Sistemas Operativos");
-        staticCursos.add("Fisica II");
-        staticCursos.add("Proyecto Final");
-        staticCursos.add("Sistemas de Gestion");
-
-        return staticCursos;
+    private ArrayList<Curso> getCursos() {
+        return new RepositorioCursos().GetAll();
     }
 }
