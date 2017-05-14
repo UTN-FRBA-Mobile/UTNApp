@@ -39,8 +39,10 @@ public class CursosRecyclerAdapter extends RecyclerView.Adapter<CursosRecyclerAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.nombreCurso.setText(cursos.get(position).materia);
-        holder.nombreCurso.setOnClickListener(new OnCursoClickListener(fragmentManager, position));
+        Curso cursoSeleccionado = cursos.get(position);
+
+        holder.nombreCurso.setText(cursoSeleccionado.materia);
+        holder.nombreCurso.setOnClickListener(new OnCursoClickListener(fragmentManager, cursoSeleccionado.getIdentificador()));
     }
 
     @Override
@@ -51,17 +53,17 @@ public class CursosRecyclerAdapter extends RecyclerView.Adapter<CursosRecyclerAd
     public class OnCursoClickListener implements View.OnClickListener {
 
         private android.support.v4.app.FragmentManager fragmentManager;
-        private int position;
+        private String cursoId;
 
-        public OnCursoClickListener(FragmentManager fragmentManager, int position) {
+        public OnCursoClickListener(FragmentManager fragmentManager, String cursoId) {
             this.fragmentManager = fragmentManager;
-            this.position = position;
+            this.cursoId = cursoId;
         }
 
         @Override
         public void onClick(View v) {
             this.fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, CursoFragment.newInstance(position), "Fragment")
+                    .replace(R.id.fragmentContainer, CursoFragment.newInstance(cursoId), "Fragment")
                     .addToBackStack("Curso")
                     .commit();
         }

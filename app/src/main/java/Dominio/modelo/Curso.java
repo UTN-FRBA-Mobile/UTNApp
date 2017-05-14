@@ -11,4 +11,8 @@ public class Curso {
     public String aula;
 
     public String sede;
+
+    public String getIdentificador(){
+        return materia + "_"+ codigo;
+    }
 }

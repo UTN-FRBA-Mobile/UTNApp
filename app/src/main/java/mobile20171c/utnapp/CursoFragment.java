@@ -10,26 +10,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import Dominio.modelo.Curso;
+import Dominio.repositorios.RepositorioCursos;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CursoFragment extends Fragment implements MainActivity.getAppTitleListener {
 
     //private RecyclerView recyclerView;
 
-    private int cursoId;
+    private String cursoId;
 
     public CursoFragment() {
         // Required empty public constructor
     }
 
-    public static CursoFragment newInstance(int cursoId) {
+    public static CursoFragment newInstance(String cursoId) {
+
         CursoFragment fragment = new CursoFragment();
 
         Bundle args = new Bundle();
-        args.putInt("cursoId", cursoId);
+        args.putString("cursoId", cursoId);
         fragment.setArguments(args);
 
         return fragment;
@@ -43,6 +44,12 @@ public class CursoFragment extends Fragment implements MainActivity.getAppTitleL
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.cursoId = getArguments().getString("cursoId");
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -51,8 +58,16 @@ public class CursoFragment extends Fragment implements MainActivity.getAppTitleL
         tabLayout.addTab(tabLayout.newTab().setText("Mensajes"));
         tabLayout.addTab(tabLayout.newTab().setText("Fechas"));
 
-        TextView textView = (TextView) view.findViewById(R.id.cursoName);
-        textView.setText("Curso "+String.valueOf(getArguments().get("cursoId")));
+        try {
+            Curso cursoActual = new RepositorioCursos().GetById(this.cursoId);
+
+            TextView textView = (TextView) view.findViewById(R.id.cursoName);
+            textView.setText(cursoActual.materia);
+        }
+        catch (RuntimeException ex){
+            Toast.makeText(this.getContext(),ex.getMessage(),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     public String getAppTitle() {

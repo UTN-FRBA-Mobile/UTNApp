@@ -27,7 +27,7 @@ public class RepositorioCursos {
 
         final Curso curso3 = new Curso()
         {{      aula = "417";
-                codigo ="";
+                codigo ="K3031";
                 materia = "Fisica II";
                 profesor = "Andrés Zuccalá";
                 sede = "Campus";
@@ -58,5 +58,17 @@ public class RepositorioCursos {
         }};
 
         return cursos;
+    }
+
+    public Curso GetById(String id) throws RuntimeException {
+
+        for(Curso curso : this.GetAll()) {
+
+            if(curso.getIdentificador().equals(id)){
+                return curso;
+            }
+        }
+
+        throw new RuntimeException("No existe el curso buscado");
     }
 }
