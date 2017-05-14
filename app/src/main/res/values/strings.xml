@@ -34,4 +34,9 @@
     <string name="registrarse">Registrarse</string>
     <string name="usuarioInvalido">Usuario y/o contraseña incorrectos</string>
     <string name="completarDatos">Debe completar los datos para ingresar</string>
+    <string name="profesor">Profesor</string>
+    <string name="codigo">Código</string>
+    <string name="aula">Aula</string>
+    <string name="sede">Sede</string>
+    <string name="materia">Materia</string>
 </resources>
