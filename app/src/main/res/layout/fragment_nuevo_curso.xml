@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="Materia"
-        style="@style/AppTheme.FormLabel"
+        style="@style/AppThemeFormLabel"
         />
 
     <Spinner
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="Sede"
-        style="@style/AppTheme.FormLabel"
+        style="@style/AppThemeFormLabel"
         />
 
     <Spinner
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="Aula"
-        style="@style/AppTheme.FormLabel"
+        style="@style/AppThemeFormLabel"
         />
 
     <EditText

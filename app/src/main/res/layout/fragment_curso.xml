@@ -28,7 +28,7 @@
         <TextView
             android:id="@+id/cursoName"
             android:text="@string/materia"
-            style="@style/AppTheme.FormLabel"
+            style="@style/AppThemeFormLabel"
             />
 
         <TextView
@@ -41,7 +41,7 @@
         <TextView
             android:id="@+id/cursoCodigo"
             android:text="@string/codigo"
-            style="@style/AppTheme.FormLabel"
+            style="@style/AppThemeFormLabel"
             />
 
         <TextView
@@ -54,7 +54,7 @@
         <TextView
             android:id="@+id/cursoProfesor"
             android:text="@string/profesor"
-            style="@style/AppTheme.FormLabel"
+            style="@style/AppThemeFormLabel"
             />
 
         <TextView
@@ -67,7 +67,7 @@
         <TextView
             android:id="@+id/cursoAula"
             android:text="@string/aula"
-            style="@style/AppTheme.FormLabel"
+            style="@style/AppThemeFormLabel"
             />
 
         <TextView
@@ -80,7 +80,7 @@
         <TextView
             android:id="@+id/cursoSede"
             android:text="@string/sede"
-            style="@style/AppTheme.FormLabel"
+            style="@style/AppThemeFormLabel"
             />
 
         <TextView
