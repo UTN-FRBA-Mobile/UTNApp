@@ -8,8 +8,12 @@
             android:title="@string/mis_cursos" />
         <item
             android:id="@+id/calendario"
-            android:icon="@drawable/ic_today_black_24dp"
+            android:icon="@drawable/ic_academico"
             android:title="@string/calendario_acad_mico" />
+        <item
+            android:id="@+id/fechas"
+            android:icon="@drawable/ic_today_black_24dp"
+            android:title="@string/fechas" />
         <item
             android:id="@+id/noticias"
             android:icon="@drawable/ic_local_library_black_24dp"

@@ -25,7 +25,6 @@
         completions."
     </string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_noticias_fragment">noticias fragment</string>
     <string name="hello_calendario_fragment">calendario fragment</string>
     <string name="hello_configuracion_fragment">configuracion fragment</string>
@@ -34,4 +33,5 @@
     <string name="registrarse">Registrarse</string>
     <string name="usuarioInvalido">Usuario y/o contraseña incorrectos</string>
     <string name="completarDatos">Debe completar los datos para ingresar</string>
+    <string name="fechas">Mis fechas</string>
 </resources>

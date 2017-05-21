@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity
         } else {
             setTitle("UTN App");
         }
-
     }
 
     public interface getAppTitleListener {
@@ -144,10 +143,10 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.fragmentContainer, CursosFragment.newInstance(), "Fragment")
                     .addToBackStack("Cursos")
                     .commit();
-        } else if (id == R.id.calendario) {
+        } else if (id == R.id.fechas) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, CalendarioFragment.newInstance(), "Fragment")
-                    .addToBackStack("Calendario")
+                    .replace(R.id.fragmentContainer, FechaFragment.newInstance(1), "Fragment")
+                    .addToBackStack("Fechas")
                     .commit();
         } else if (id == R.id.noticias) {
             getSupportFragmentManager().beginTransaction()
@@ -159,7 +158,13 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.fragmentContainer, ConfiguracionFragment.newInstance(), "Fragment")
                     .addToBackStack("Configuracion")
                     .commit();
-        } else if (id == R.id.logout) {
+        } else if (id == R.id.calendario){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, ConfiguracionFragment.newInstance(), "Fragment")
+                    .addToBackStack("Calendario")
+                    .commit();
+        }
+        else if (id == R.id.logout) {
             desloguearUsuario();
         }
 
