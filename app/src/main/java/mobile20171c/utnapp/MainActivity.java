@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity
             Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
 
             if (currentFragment instanceof getAppTitleListener) {
+                // esto no esta funcionando muy bien
                 setTitle(((getAppTitleListener) currentFragment).getAppTitle());
             } else {
                 setTitle(fragmentTag);

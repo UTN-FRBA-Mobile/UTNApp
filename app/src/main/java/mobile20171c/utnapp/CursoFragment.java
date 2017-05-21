@@ -61,8 +61,12 @@ public class CursoFragment extends Fragment implements MainActivity.getAppTitleL
         try {
             Curso cursoActual = new RepositorioCursos().GetById(this.cursoId);
 
-            TextView textView = (TextView) view.findViewById(R.id.cursoName);
-            textView.setText(cursoActual.materia);
+            ((TextView) view.findViewById(R.id.cursoNameTxt)).setText(cursoActual.materia);
+            ((TextView) view.findViewById(R.id.cursoCodigoTxt)).setText(cursoActual.codigo);
+            ((TextView) view.findViewById(R.id.cursoProfesorTxt)).setText(cursoActual.profesor);
+            ((TextView) view.findViewById(R.id.cursoAulaTxt)).setText(cursoActual.aula);
+            ((TextView) view.findViewById(R.id.cursoSedeTxt)).setText(cursoActual.sede);
+
         }
         catch (RuntimeException ex){
             Toast.makeText(this.getContext(),ex.getMessage(),

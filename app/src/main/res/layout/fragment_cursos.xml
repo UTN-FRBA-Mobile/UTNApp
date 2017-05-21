@@ -24,7 +24,7 @@
         <TextView
             android:layout_weight="0"
             android:text="@string/hello_cursos_fragment"
-            style="@style/AppTheme.Title"
+            style="@style/AppThemeTitle"
             />
 
         <android.support.v7.widget.RecyclerView android:id="@+id/recyclerViewCursos"
