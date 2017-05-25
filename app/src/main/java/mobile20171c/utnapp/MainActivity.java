@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity
                     .commit();
         } else if (id == R.id.calendario){
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, ConfiguracionFragment.newInstance(), "Fragment")
+                    .replace(R.id.fragmentContainer, CalendarioFragment.newInstance(), "Fragment")
                     .addToBackStack("Calendario")
                     .commit();
         }
