@@ -40,4 +40,15 @@ public class RepositorioFechas {
             add(fecha2);
         }};
     }
+
+    public ArrayList<Fecha> GetFechasDeCurso(String idCurso) {
+        ArrayList<Fecha> fechas = getAllPara("Prueba");
+        ArrayList<Fecha> ret = new ArrayList<Fecha>();
+        for (Fecha fecha :
+                fechas) {
+            if (fecha.curso.getIdentificador().equals(idCurso))
+                ret.add(fecha);
+        }
+        return ret;
+    }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -54,25 +55,57 @@ public class CursoFragment extends Fragment implements MainActivity.getAppTitleL
         super.onViewCreated(view, savedInstanceState);
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabsCurso);;
-        tabLayout.addTab(tabLayout.newTab().setText("Info"));
-        tabLayout.addTab(tabLayout.newTab().setText("Mensajes"));
-        tabLayout.addTab(tabLayout.newTab().setText("Fechas"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.cursos_informacion));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.cursos_mesajes));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.cursos_fechas));
 
         try {
-            Curso cursoActual = new RepositorioCursos().GetById(this.cursoId);
+            TabLayout tabs= (TabLayout)view.findViewById(R.id.tabsCurso);
+            tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    FragmentTransaction transaction;
+                    switch (tab.getPosition()){
+                        case 0:
+                            transaction = getChildFragmentManager().beginTransaction();
+                            transaction.replace(R.id.child_fragment_container, CursoInfoFragment.newInstance(cursoId)).commit();
+                            break;
+                        case 1:
+                            transaction = getChildFragmentManager().beginTransaction();
+                            transaction.replace(R.id.child_fragment_container, CursoMensajeFragment.newInstance(cursoId)).commit();
+                            break;
+                        case 2:
+                            transaction = getChildFragmentManager().beginTransaction();
+                            transaction.replace(R.id.child_fragment_container, CursoFechaFragment.newInstance(cursoId)).commit();
+                            break;
 
-            ((TextView) view.findViewById(R.id.cursoNameTxt)).setText(cursoActual.materia);
-            ((TextView) view.findViewById(R.id.cursoCodigoTxt)).setText(cursoActual.codigo);
-            ((TextView) view.findViewById(R.id.cursoProfesorTxt)).setText(cursoActual.profesor);
-            ((TextView) view.findViewById(R.id.cursoAulaTxt)).setText(cursoActual.aula);
-            ((TextView) view.findViewById(R.id.cursoSedeTxt)).setText(cursoActual.sede);
+                    }
 
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            });
+
+            Fragment childFragment = CursoInfoFragment.newInstance(this.cursoId);
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.child_fragment_container, childFragment).commit();
         }
         catch (RuntimeException ex){
             Toast.makeText(this.getContext(),ex.getMessage(),
                     Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 
     public String getAppTitle() {
         return "Materia: "+String.valueOf(getArguments().get("cursoId"));

@@ -1,0 +1,73 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:padding="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/cursoName"
+        android:text="@string/materia"
+        style="@style/AppThemeFormLabel"
+        />
+
+    <TextView
+        android:id="@+id/cursoNameTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:id="@+id/cursoCodigo"
+        android:text="@string/codigo"
+        style="@style/AppThemeFormLabel"
+        />
+
+    <TextView
+        android:id="@+id/cursoCodigoTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:id="@+id/cursoProfesor"
+        android:text="@string/profesor"
+        style="@style/AppThemeFormLabel"
+        />
+
+    <TextView
+        android:id="@+id/cursoProfesorTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:id="@+id/cursoAula"
+        android:text="@string/aula"
+        style="@style/AppThemeFormLabel"
+        />
+
+    <TextView
+        android:id="@+id/cursoAulaTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:id="@+id/cursoSede"
+        android:text="@string/sede"
+        style="@style/AppThemeFormLabel"
+        />
+
+    <TextView
+        android:id="@+id/cursoSedeTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>

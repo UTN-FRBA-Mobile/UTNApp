@@ -41,4 +41,8 @@
     <string name="materia">Materia</string>
 
     <string name="fechas">Mis fechas</string>
+
+    <string name="cursos_informacion">Información</string>
+    <string name="cursos_mesajes">Mensajes</string>
+    <string name="cursos_fechas">Fechas</string>
 </resources>

@@ -1,8 +1,9 @@
 package mobile20171c.utnapp;
 
+
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,30 +11,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import Dominio.modelo.Fecha;
-import Dominio.repositorios.RepositorioCursos;
-import Dominio.repositorios.RepositorioFechas;
-import mobile20171c.utnapp.dummy.DummyContent;
-import mobile20171c.utnapp.dummy.DummyContent.DummyItem;
-
 import java.util.ArrayList;
-import java.util.List;
 
-public class FechaFragment extends Fragment {
+import Dominio.modelo.Fecha;
+import Dominio.repositorios.RepositorioFechas;
 
-    private OnListFragmentInteractionListener mListener;
+public class CursoFechaFragment extends Fragment {
 
-    public FechaFragment() {
+    private static final String ARG_ID_CURSO = "idCurso";
+    private String idCurso;
+    private FechaFragment.OnListFragmentInteractionListener mListener;
+
+    public CursoFechaFragment() {
     }
 
-    public static FechaFragment newInstance() {
-        return new FechaFragment();
+    public static CursoFechaFragment newInstance(String idCurso) {
+        CursoFechaFragment fragment = new CursoFechaFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_ID_CURSO, idCurso);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (getArguments() != null) {
+            idCurso = getArguments().getString(ARG_ID_CURSO);
+        }
     }
 
     @Override
@@ -47,8 +53,7 @@ public class FechaFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new GridLayoutManager(context, 1));
 
-            //TODO: Reemplazar por el mail verdadero del usuario
-            ArrayList<Fecha> fechasImportantes = new RepositorioFechas().getAllPara("emailUsuario");
+            ArrayList<Fecha> fechasImportantes = new RepositorioFechas().GetFechasDeCurso(this.idCurso);
             recyclerView.setAdapter(new MyFechaRecyclerViewAdapter(fechasImportantes, mListener));
         }
         return view;
@@ -57,8 +62,8 @@ public class FechaFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof FechaFragment.OnListFragmentInteractionListener) {
+            mListener = (FechaFragment.OnListFragmentInteractionListener) context;
         } else {
         }
     }
@@ -72,4 +77,5 @@ public class FechaFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(Fecha item);
     }
+
 }

@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity
                     .commit();
         } else if (id == R.id.fechas) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, FechaFragment.newInstance(1), "Fragment")
+                    .replace(R.id.fragmentContainer, FechaFragment.newInstance(), "Fragment")
                     .addToBackStack("Mis fechas")
                     .commit();
         } else if (id == R.id.noticias) {
