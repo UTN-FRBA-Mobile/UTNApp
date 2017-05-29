@@ -19,7 +19,6 @@
         />
 
     <Spinner
-        android:entries="@array/materias"
         android:id="@+id/nuevoCursoMateria"
         style="@style/AppTheme.FormElement"></Spinner>
 

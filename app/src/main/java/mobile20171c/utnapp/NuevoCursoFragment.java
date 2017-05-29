@@ -1,11 +1,13 @@
 package mobile20171c.utnapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -13,10 +15,15 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -39,6 +46,8 @@ public class NuevoCursoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_nuevo_curso, container, false);
 
         Button button = (Button) view.findViewById(R.id.buttonCrearCurso);
+
+        FirebaseDatabase.getInstance().getReference().child("materias").addValueEventListener(new MateriaValuesEventListener(getContext(), view));
 
         button.setOnClickListener(new View.OnClickListener()
         {
@@ -110,6 +119,37 @@ public class NuevoCursoFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private class MateriaValuesEventListener implements ValueEventListener {
+
+        Context context;
+        View view;
+
+        public MateriaValuesEventListener(Context context, View view) {
+            this.context = context;
+            this.view = view;
+        }
+
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            final List<String> materias = new ArrayList<String>();
+
+            for (DataSnapshot materiaSnapshot: dataSnapshot.getChildren()) {
+                String nombreMateria = materiaSnapshot.getValue(String.class);
+                materias.add(nombreMateria);
+            }
+
+            Spinner materiasSpiner = (Spinner) view.findViewById(R.id.nuevoCursoMateria);
+            ArrayAdapter<String> materiasAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, materias);
+            materiasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            materiasSpiner.setAdapter(materiasAdapter);
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
     }
 
     @Override
