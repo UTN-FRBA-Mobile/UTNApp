@@ -33,7 +33,7 @@ public class MyMensajeRecyclerViewAdapter extends RecyclerView.Adapter<MyMensaje
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mMensaje = mMensajes.get(position);
         holder.mIdView.setText(mMensajes.get(position).Autor);
-        holder.mContentView.setText(mMensajes.get(position).GetPreview());
+        holder.mContentView.setText(mMensajes.get(position).Contenido);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -14,19 +14,8 @@ public class Mensaje {
 
     public Curso Curso;
 
-    public String GetPreview(){
-
-        String preview;
-
-        if(this.Contenido.length() > LARGOPREVIEW){
-
-            preview = this.Contenido.substring(0,LARGOPREVIEW)+"[...]";
-
-        } else {
-            preview = this.Contenido;
-        }
-
-        return preview;
+    public Mensaje(){
+        FechaCreacion = new Date();
     }
 
 

@@ -10,4 +10,9 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="mobile20171c.utnapp.CursoMensajeFragment"
-    tools:listitem="@layout/fragment_mensaje" />
+    tools:listitem="@layout/fragment_mensaje"/>
+
+
+
+
+
