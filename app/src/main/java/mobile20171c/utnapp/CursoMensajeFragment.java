@@ -10,6 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Dominio.modelo.Mensaje;
+import Dominio.repositorios.RepositorioMensajes;
 import mobile20171c.utnapp.dummy.DummyContent;
 import mobile20171c.utnapp.dummy.DummyContent.DummyItem;
 
@@ -25,10 +30,6 @@ public class CursoMensajeFragment extends Fragment {
     private String midCurso;
     private OnListFragmentInteractionListener mListener;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public CursoMensajeFragment() {
     }
 
@@ -54,12 +55,12 @@ public class CursoMensajeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mensaje_list, container, false);
 
-        // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new GridLayoutManager(context,1));
-            recyclerView.setAdapter(new MyMensajeRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            List<Mensaje> mensajesDelCurso = new RepositorioMensajes().GetMensajesDeCurso(midCurso);
+            recyclerView.setAdapter(new MyMensajeRecyclerViewAdapter(mensajesDelCurso, mListener));
         }
         return view;
     }
@@ -91,7 +92,6 @@ public class CursoMensajeFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Mensaje mensaje);
     }
 }

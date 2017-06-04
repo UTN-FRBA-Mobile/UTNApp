@@ -6,23 +6,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import Dominio.modelo.Mensaje;
 import mobile20171c.utnapp.CursoMensajeFragment.OnListFragmentInteractionListener;
-import mobile20171c.utnapp.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class MyMensajeRecyclerViewAdapter extends RecyclerView.Adapter<MyMensajeRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Mensaje> mMensajes;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyMensajeRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+    public MyMensajeRecyclerViewAdapter(List<Mensaje> mensajesCurso, OnListFragmentInteractionListener listener) {
+        mMensajes = mensajesCurso;
         mListener = listener;
     }
 
@@ -35,9 +31,9 @@ public class MyMensajeRecyclerViewAdapter extends RecyclerView.Adapter<MyMensaje
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mMensaje = mMensajes.get(position);
+        holder.mIdView.setText(mMensajes.get(position).Autor);
+        holder.mContentView.setText(mMensajes.get(position).GetPreview());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +41,7 @@ public class MyMensajeRecyclerViewAdapter extends RecyclerView.Adapter<MyMensaje
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onListFragmentInteraction(holder.mMensaje);
                 }
             }
         });
@@ -53,14 +49,14 @@ public class MyMensajeRecyclerViewAdapter extends RecyclerView.Adapter<MyMensaje
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return mMensajes.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public Mensaje mMensaje;
 
         public ViewHolder(View view) {
             super(view);
