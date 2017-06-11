@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,6 +91,10 @@ public class CursoMensajeFragment extends Fragment {
                 mensaje.autorId = user.getUid();
                 mensaje.autor = user.getEmail(); // TODO: por que user.getDisplayName() no  devuelve nada?
                 mensaje.contenido = contenido;
+
+                int tipoMensaje = ((Spinner) v.getRootView().findViewById(R.id.tipoMensaje)).getSelectedItemPosition();
+                mensaje.tipoMensaje = tipoMensaje;
+
                 mensaje.curso = midCurso;
 
                 DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
