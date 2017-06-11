@@ -46,7 +46,7 @@ public class RepositorioFechas {
         ArrayList<Fecha> ret = new ArrayList<Fecha>();
         for (Fecha fecha :
                 fechas) {
-            if (fecha.curso.getIdentificador().equals(idCurso))
+            if (fecha.curso.id.equals(idCurso))
                 ret.add(fecha);
         }
         return ret;

@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import Dominio.modelo.Curso;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -96,18 +98,18 @@ public class NuevoCursoFragment extends Fragment {
                 }
 
                 // creamos el curso
-                HashMap<String, String> curso = new HashMap<>();
-                curso.put("materia", materia);
-                curso.put("codigo", codigo);
-                curso.put("profesor", profesor);
-                curso.put("sede", sede);
-                curso.put("aula", aula);
+                Curso curso = new Curso();
+                curso.materia = materia;
+                curso.codigo = codigo;
+                curso.profesor = profesor;
+                curso.sede = sede;
+                curso.aula = aula;
 
                 DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
 
                 String key = dbRef.child("cursos").push().getKey();
 
-                curso.put("id", key);
+                curso.id = key;
 
                 dbRef.child("cursos").child(key).setValue(curso);
 

@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="mobile20171c.utnapp.CursoMensajeFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context="mobile20171c.utnapp.CursoMensajeFragment"
-    tools:listitem="@layout/fragment_mensaje"/>
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/recyclerViewMensajes"
+        android:name="mobile20171c.utnapp.CursoMensajeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        tools:context="mobile20171c.utnapp.CursoMensajeFragment"
+        tools:listitem="@layout/mensajes_item"
+        />
+
+    <!--android:layout_alignParentTop="true"
+android:layout_above="@+id/nuevoMensaje"-->
+
+    <EditText
+        style="@style/AppTheme.FormElement"
+        android:id="@+id/nuevoMensaje"
+        android:hint="@string/mensaje_hint"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/buttonNuevoMensaje"/>
+
+    <Button
+        android:id="@+id/buttonNuevoMensaje"
+        android:layout_height="wrap_content"
+        android:layout_width="96dp"
+        android:text="Enviar"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true">
+    </Button>
+
+</RelativeLayout>
 
 
 

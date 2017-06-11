@@ -14,7 +14,4 @@ public class Curso {
 
     public String sede;
 
-    public String getIdentificador(){
-        return id;
-    }
 }

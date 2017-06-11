@@ -4,19 +4,20 @@ import java.util.Date;
 
 public class Mensaje {
 
-    static final int LARGOPREVIEW = 30;
+    public String id;
 
-    public String Autor;
+    public String autorId;
 
-    public String Contenido;
+    public String autor;
 
-    public Date FechaCreacion;
+    public String contenido;
 
-    public Curso Curso;
+    public Date fechaCreacion;
+
+    public String curso;
 
     public Mensaje(){
-        FechaCreacion = new Date();
+        fechaCreacion = new Date();
     }
-
 
 }

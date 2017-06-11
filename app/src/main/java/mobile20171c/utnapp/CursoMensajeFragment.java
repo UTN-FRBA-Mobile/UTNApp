@@ -2,21 +2,24 @@ package mobile20171c.utnapp;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import Dominio.modelo.Mensaje;
-import Dominio.repositorios.RepositorioMensajes;
-import mobile20171c.utnapp.dummy.DummyContent;
-import mobile20171c.utnapp.dummy.DummyContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.
@@ -30,9 +33,6 @@ public class CursoMensajeFragment extends Fragment {
     private String midCurso;
     private OnListFragmentInteractionListener mListener;
 
-    public CursoMensajeFragment() {
-    }
-
     public static CursoMensajeFragment newInstance(String idCurso) {
         CursoMensajeFragment fragment = new CursoMensajeFragment();
         Bundle args = new Bundle();
@@ -45,24 +45,64 @@ public class CursoMensajeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            midCurso = getArguments().getString(ARG_ID_CURSO);
-        }
+        midCurso = getArguments().getString(ARG_ID_CURSO);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mensaje_list, container, false);
+        return inflater.inflate(R.layout.fragment_mensaje_list, container, false);
+    }
 
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new GridLayoutManager(context,1));
-            List<Mensaje> mensajesDelCurso = new RepositorioMensajes().GetMensajesDeCurso(midCurso);
-            recyclerView.setAdapter(new MyMensajeRecyclerViewAdapter(mensajesDelCurso, mListener));
-        }
-        return view;
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        /* recycler */
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewMensajes);
+
+        recyclerView.setAdapter(new MensajesRecyclerAdapter(
+                        FirebaseDatabase.getInstance().getReference().child("mensajes").child(midCurso)
+                )
+        );
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        /* button */
+        Button button = (Button) view.findViewById(R.id.buttonNuevoMensaje);
+
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String contenido = ((EditText) v.getRootView().findViewById(R.id.nuevoMensaje)).getText().toString();
+
+                if (contenido.equals("")) {
+                    Toast.makeText(v.getContext(), "Completa el mensaje.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // se lo asignamos al usuario actual
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                // creamos el mensaje
+                Mensaje mensaje = new Mensaje();
+                mensaje.autorId = user.getUid();
+                mensaje.autor = user.getEmail(); // TODO: por que user.getDisplayName() no  devuelve nada?
+                mensaje.contenido = contenido;
+                mensaje.curso = midCurso;
+
+                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+
+                String key = dbRef.child("mensajes").child(midCurso).push().getKey();
+
+                mensaje.id = key;
+
+                dbRef.child("mensajes").child(midCurso).child(key).setValue(mensaje);
+
+                Toast.makeText(v.getContext(), "Mensaje enviado.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

@@ -45,4 +45,5 @@
     <string name="cursos_informacion">Información</string>
     <string name="cursos_mesajes">Mensajes</string>
     <string name="cursos_fechas">Fechas</string>
+    <string name="mensaje_hint">Mensaje...</string>
 </resources>
