@@ -7,9 +7,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class CursosFragment extends Fragment {
@@ -46,7 +51,15 @@ public class CursosFragment extends Fragment {
         });
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewCursos);
-        recyclerView.setAdapter(new CursosRecyclerAdapter(getContext()));
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("user uid", user.getUid());
+        recyclerView.setAdapter(new CursosRecyclerAdapter(
+                                        getContext(),
+                                        FirebaseDatabase.getInstance().getReference().child("usuarios").child(user.getUid()).child("cursos")
+                                    )
+        );
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 

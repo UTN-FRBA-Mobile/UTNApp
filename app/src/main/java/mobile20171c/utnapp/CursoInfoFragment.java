@@ -5,19 +5,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import Dominio.modelo.Curso;
-import Dominio.repositorios.RepositorioCursos;
 
 public class CursoInfoFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "cursoId";
-
-    private Curso cursoActual;
 
     private OnFragmentInteractionListener mListener;
 
@@ -37,9 +40,6 @@ public class CursoInfoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            cursoActual = new RepositorioCursos().GetById(getArguments().getString(ARG_PARAM1));
-        }
     }
 
     @Override
@@ -62,11 +62,40 @@ public class CursoInfoFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        ((TextView) view.findViewById(R.id.cursoNameTxt)).setText(cursoActual.materia);
-        ((TextView) view.findViewById(R.id.cursoCodigoTxt)).setText(cursoActual.codigo);
-        ((TextView) view.findViewById(R.id.cursoProfesorTxt)).setText(cursoActual.profesor);
-        ((TextView) view.findViewById(R.id.cursoAulaTxt)).setText(cursoActual.aula);
-        ((TextView) view.findViewById(R.id.cursoSedeTxt)).setText(cursoActual.sede);
+        FirebaseDatabase.getInstance()
+                .getReference("cursos")
+                .child(getArguments().getString(ARG_PARAM1))
+                .addListenerForSingleValueEvent(new CursoValueEventListener(view));
+    }
+
+    public class CursoValueEventListener implements ValueEventListener {
+
+        View view;
+
+        public CursoValueEventListener(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void onDataChange(DataSnapshot snapshot) {
+            if (snapshot.exists()) {
+
+                Curso cursoActual = snapshot.getValue(Curso.class);
+
+                ((TextView) view.findViewById(R.id.cursoNameTxt)).setText(cursoActual.materia);
+                ((TextView) view.findViewById(R.id.cursoCodigoTxt)).setText(cursoActual.codigo);
+                ((TextView) view.findViewById(R.id.cursoProfesorTxt)).setText(cursoActual.profesor);
+                ((TextView) view.findViewById(R.id.cursoAulaTxt)).setText(cursoActual.aula);
+                ((TextView) view.findViewById(R.id.cursoSedeTxt)).setText(cursoActual.sede);
+            } else {
+                Log.e("CursoValueEventListener", "Curso not found");
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Log.e("CursoValueEventListener", databaseError.toString());
+        }
     }
 
     @Override

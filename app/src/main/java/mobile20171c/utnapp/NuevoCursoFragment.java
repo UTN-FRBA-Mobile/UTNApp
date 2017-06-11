@@ -106,12 +106,15 @@ public class NuevoCursoFragment extends Fragment {
                 DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
 
                 String key = dbRef.child("cursos").push().getKey();
+
+                curso.put("id", key);
+
                 dbRef.child("cursos").child(key).setValue(curso);
 
                 // se lo asignamos al usuario actual
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                dbRef.child("cursosUsuario/"+user.getUid()).push().setValue(key);
+                dbRef.child("usuarios").child(user.getUid()).child("cursos").child(key).setValue(curso);
 
                 // TODO: cambiar el fragment
                 Toast.makeText(v.getContext(), "Curso creado correctamente", Toast.LENGTH_SHORT).show();

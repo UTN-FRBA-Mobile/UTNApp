@@ -60,15 +60,4 @@ public class RepositorioCursos {
         return cursos;
     }
 
-    public Curso GetById(String id) throws RuntimeException {
-
-        for(Curso curso : this.GetAll()) {
-
-            if(curso.getIdentificador().equals(id)){
-                return curso;
-            }
-        }
-
-        throw new RuntimeException("No existe el curso buscado");
-    }
 }

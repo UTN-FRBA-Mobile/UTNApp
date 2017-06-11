@@ -4,58 +4,52 @@ import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
 
 import Dominio.modelo.Curso;
-import Dominio.repositorios.RepositorioCursos;
 
-public class CursosRecyclerAdapter extends RecyclerView.Adapter<CursosRecyclerAdapter.ViewHolder> {
+public class CursosRecyclerAdapter extends FirebaseRecyclerAdapter<Curso, CursosRecyclerAdapter.CursosViewHolder> {
 
-    private LayoutInflater layoutInflater;
-    private ArrayList<Curso> cursos;
     private FragmentManager fragmentManager;
 
-    public CursosRecyclerAdapter(Context context) {
-        layoutInflater = LayoutInflater.from(context);
-        cursos = getCursos();
+    public CursosRecyclerAdapter(Context context, DatabaseReference ref) {
+        super(Curso.class, R.layout.cursos_item, CursosRecyclerAdapter.CursosViewHolder.class, ref);
+
         fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
     }
 
     @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+    protected void populateViewHolder(CursosViewHolder viewHolder, Curso model, int position) {
+        viewHolder.setContent(model.materia);
+
+        viewHolder.view.setOnClickListener(new OnCursoClickListener(fragmentManager, model.id));
     }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.cursos_item, parent, false);
-        return new ViewHolder(view);
+    static class CursosViewHolder extends RecyclerView.ViewHolder {
+        View view;
+
+        public CursosViewHolder(View itemView) {
+            super(itemView);
+            view = itemView;
+        }
+
+        public void setContent(String materia){
+            TextView field = (TextView) view.findViewById(R.id.nombreCurso);
+            field.setText(materia);
+        }
+
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Curso cursoSeleccionado = cursos.get(position);
-
-        holder.nombreCurso.setText(cursoSeleccionado.materia);
-        holder.nombreCurso.setOnClickListener(new OnCursoClickListener(fragmentManager, cursoSeleccionado.getIdentificador()));
-    }
-
-    @Override
-    public int getItemCount() {
-        return cursos.size();
-    }
-
-    public class OnCursoClickListener implements View.OnClickListener {
+    private class OnCursoClickListener implements View.OnClickListener {
 
         private android.support.v4.app.FragmentManager fragmentManager;
         private String cursoId;
 
-        public OnCursoClickListener(FragmentManager fragmentManager, String cursoId) {
+        private OnCursoClickListener(FragmentManager fragmentManager, String cursoId) {
             this.fragmentManager = fragmentManager;
             this.cursoId = cursoId;
         }
@@ -69,17 +63,4 @@ public class CursosRecyclerAdapter extends RecyclerView.Adapter<CursosRecyclerAd
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView nombreCurso;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            nombreCurso = (TextView) itemView.findViewById(R.id.nombreCurso);
-        }
-    }
-
-    private ArrayList<Curso> getCursos() {
-        return new RepositorioCursos().GetAll();
-    }
 }
