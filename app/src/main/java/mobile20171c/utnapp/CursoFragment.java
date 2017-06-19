@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import Dominio.modelo.Curso;
-import Dominio.repositorios.RepositorioCursos;
 
 public class CursoFragment extends Fragment implements MainActivity.getAppTitleListener {
 

@@ -5,14 +5,12 @@ import java.util.Date;
 
 public class Fecha {
 
-    public Curso curso;
+    public String id;
 
-    public String descripcion;
+    public String idCurso;
+
+    public String evento;
 
     public Date fecha;
 
-    public String getMateria() {
-
-        return this.curso.materia;
-    }
 }

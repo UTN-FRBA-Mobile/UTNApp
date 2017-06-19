@@ -1,29 +1,27 @@
 package mobile20171c.utnapp;
 
 
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import com.google.firebase.database.FirebaseDatabase;
 
 import Dominio.modelo.Fecha;
-import Dominio.repositorios.RepositorioFechas;
 
 public class CursoFechaFragment extends Fragment {
 
     private static final String ARG_ID_CURSO = "idCurso";
     private String idCurso;
     private FechaFragment.OnListFragmentInteractionListener mListener;
-
-    public CursoFechaFragment() {
-    }
 
     public static CursoFechaFragment newInstance(String idCurso) {
         CursoFechaFragment fragment = new CursoFechaFragment();
@@ -37,26 +35,36 @@ public class CursoFechaFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            idCurso = getArguments().getString(ARG_ID_CURSO);
-        }
+        idCurso = getArguments().getString(ARG_ID_CURSO);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fecha_list, container, false);
+        return inflater.inflate(R.layout.fragment_fecha_list, container, false);
+    }
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new GridLayoutManager(context, 1));
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-            ArrayList<Fecha> fechasImportantes = new RepositorioFechas().GetFechasDeCurso(this.idCurso);
-            recyclerView.setAdapter(new MyFechaRecyclerViewAdapter(fechasImportantes, mListener));
-        }
-        return view;
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newFragment = DatePickerFragment.newInstance(idCurso);
+                newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+            }
+        });
+
+        /* recycler */
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerFechas);
+
+        recyclerView.setAdapter(new FechaRecyclerAdapter(
+                        FirebaseDatabase.getInstance().getReference().child("fechasCursos").child(idCurso)
+                )
+        );
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override

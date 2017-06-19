@@ -92,9 +92,6 @@ public class CursoMensajeFragment extends Fragment {
                 mensaje.autor = user.getEmail(); // TODO: por que user.getDisplayName() no  devuelve nada?
                 mensaje.contenido = contenido;
 
-                int tipoMensaje = ((Spinner) v.getRootView().findViewById(R.id.tipoMensaje)).getSelectedItemPosition();
-                mensaje.tipoMensaje = tipoMensaje;
-
                 mensaje.curso = midCurso;
 
                 DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();

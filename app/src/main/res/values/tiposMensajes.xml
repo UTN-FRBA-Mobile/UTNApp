@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="tiposMensajes">
-        <item>Mensaje general</item>
-        <item>Fecha importante</item>
-        <item>Cambio de aula</item>
-        <item>Suspension de clases</item>
-    </string-array>
-</resources>

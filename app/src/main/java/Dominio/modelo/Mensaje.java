@@ -14,8 +14,6 @@ public class Mensaje {
 
     public Date fechaCreacion;
 
-    public int tipoMensaje;
-
     public String curso;
 
     public Mensaje(){
