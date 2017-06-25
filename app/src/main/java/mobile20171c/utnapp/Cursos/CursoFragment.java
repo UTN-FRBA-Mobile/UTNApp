@@ -15,8 +15,6 @@ import mobile20171c.utnapp.R;
 
 public class CursoFragment extends Fragment implements MainActivity.getAppTitleListener {
 
-    //private RecyclerView recyclerView;
-
     private String cursoId;
 
     public CursoFragment() {

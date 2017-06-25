@@ -119,8 +119,12 @@ public class NuevoCursoFragment extends Fragment {
                 // se lo asignamos al usuario actual
                 dbRef.child("usuarios").child(user.getUid()).child("cursos").child(key).setValue(curso);
 
-                // TODO: cambiar el fragment
                 Toast.makeText(v.getContext(), "Curso creado correctamente", Toast.LENGTH_SHORT).show();
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainer, CursoFragment.newInstance(curso.id), "Fragment")
+                        .addToBackStack("Curso")
+                        .commit();
             }
         });
 
