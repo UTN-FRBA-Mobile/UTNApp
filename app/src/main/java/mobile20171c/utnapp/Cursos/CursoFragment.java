@@ -49,13 +49,12 @@ public class CursoFragment extends Fragment implements MainActivity.getAppTitleL
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabsCurso);;
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.cursos_informacion));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.cursos_mesajes));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.cursos_fechas));
+        TabLayout tabs = (TabLayout) view.findViewById(R.id.tabsCurso);
+        tabs.addTab(tabs.newTab().setText(R.string.cursos_informacion));
+        tabs.addTab(tabs.newTab().setText(R.string.cursos_mesajes));
+        tabs.addTab(tabs.newTab().setText(R.string.cursos_fechas));
 
         try {
-            TabLayout tabs= (TabLayout)view.findViewById(R.id.tabsCurso);
             tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
