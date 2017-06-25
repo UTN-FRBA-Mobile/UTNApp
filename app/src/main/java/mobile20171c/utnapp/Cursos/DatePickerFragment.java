@@ -1,4 +1,4 @@
-package mobile20171c.utnapp;
+package mobile20171c.utnapp.Cursos;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,18 +15,24 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
+import mobile20171c.utnapp.Modelo.Curso;
 import mobile20171c.utnapp.Modelo.Fecha;
+import mobile20171c.utnapp.R;
 
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     private static final String ARG_ID_CURSO = "idCurso";
     private String idCurso;
+    private Curso curso;
 
     public static DatePickerFragment newInstance(String idCurso) {
         DatePickerFragment fragment = new DatePickerFragment();
@@ -33,6 +40,10 @@ public class DatePickerFragment extends DialogFragment
         args.putString(ARG_ID_CURSO, idCurso);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    private void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
     @Override
@@ -50,6 +61,11 @@ public class DatePickerFragment extends DialogFragment
                         // User cancelled the dialog
                     }
                 });
+
+        FirebaseDatabase.getInstance()
+                .getReference("cursos")
+                .child(getArguments().getString(ARG_ID_CURSO))
+                .addListenerForSingleValueEvent(new CursoValueEventListener(this));
 
         final AlertDialog d = builder.create();
 
@@ -76,6 +92,8 @@ public class DatePickerFragment extends DialogFragment
                         Fecha fecha = new Fecha();
                         fecha.idCurso = idCurso;
                         fecha.evento = evento.getText().toString();
+
+                        fecha.materia = curso.materia;
 
                         int   day  = datepicker.getDayOfMonth();
                         int   month= datepicker.getMonth();
@@ -114,5 +132,28 @@ public class DatePickerFragment extends DialogFragment
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
+    }
+
+    private class CursoValueEventListener implements ValueEventListener {
+
+        DatePickerFragment fragment;
+
+        private CursoValueEventListener(DatePickerFragment fragment) {
+            this.fragment = fragment;
+        }
+
+        @Override
+        public void onDataChange(DataSnapshot snapshot) {
+            if (snapshot.exists()) {
+                fragment.setCurso(snapshot.getValue(Curso.class));
+            } else {
+                Log.e("CursoValueEventListener", "Curso not found");
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Log.e("CursoValueEventListener", databaseError.toString());
+        }
     }
 }

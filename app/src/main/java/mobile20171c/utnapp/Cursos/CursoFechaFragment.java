@@ -23,7 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import mobile20171c.utnapp.Modelo.Curso;
 import mobile20171c.utnapp.Modelo.Fecha;
-import mobile20171c.utnapp.DatePickerFragment;
 import mobile20171c.utnapp.FechaFragment;
 import mobile20171c.utnapp.R;
 import mobile20171c.utnapp.Recycler.FechaRecyclerAdapter;
@@ -57,8 +56,6 @@ public class CursoFechaFragment extends Fragment {
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
 
         FirebaseDatabase.getInstance()
                 .getReference("cursos")

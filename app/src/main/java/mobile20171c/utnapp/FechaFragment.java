@@ -49,7 +49,8 @@ public class FechaFragment extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         recyclerView.setAdapter(new FechaRecyclerAdapter(
-                        FirebaseDatabase.getInstance().getReference().child("fechasUsuarios").child(user.getUid())
+                        FirebaseDatabase.getInstance().getReference().child("fechasUsuarios").child(user.getUid()),
+                        true
                 )
         );
 

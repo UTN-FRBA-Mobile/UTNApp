@@ -11,6 +11,8 @@ public class Fecha {
 
     public String evento;
 
+    public String materia;
+
     public Date fecha;
 
 }
