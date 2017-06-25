@@ -1,4 +1,4 @@
-package mobile20171c.utnapp;
+package mobile20171c.utnapp.Recycler;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 
-import Dominio.modelo.Curso;
+import mobile20171c.utnapp.Modelo.Curso;
+import mobile20171c.utnapp.Cursos.CursoFragment;
+import mobile20171c.utnapp.R;
 
 public class CursosRecyclerAdapter extends FirebaseRecyclerAdapter<Curso, CursosRecyclerAdapter.CursosViewHolder> {
 

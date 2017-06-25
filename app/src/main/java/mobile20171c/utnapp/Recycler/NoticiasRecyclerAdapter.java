@@ -1,4 +1,4 @@
-package mobile20171c.utnapp;
+package mobile20171c.utnapp.Recycler;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import mobile20171c.utnapp.R;
 
 public class NoticiasRecyclerAdapter extends RecyclerView.Adapter<NoticiasRecyclerAdapter.ViewHolder> {
 

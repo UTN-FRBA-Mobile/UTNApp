@@ -1,4 +1,4 @@
-package mobile20171c.utnapp;
+package mobile20171c.utnapp.Recycler;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,8 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 
-import Dominio.modelo.Mensaje;
+import mobile20171c.utnapp.Modelo.Mensaje;
+import mobile20171c.utnapp.R;
 
 
 public class MensajesRecyclerAdapter extends FirebaseRecyclerAdapter<Mensaje, MensajesRecyclerAdapter.MensajesViewHolder> {

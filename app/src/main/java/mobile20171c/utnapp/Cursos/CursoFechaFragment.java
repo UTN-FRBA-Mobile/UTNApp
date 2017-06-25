@@ -1,4 +1,4 @@
-package mobile20171c.utnapp;
+package mobile20171c.utnapp.Cursos;
 
 
 import android.support.annotation.Nullable;
@@ -15,7 +15,11 @@ import android.view.ViewGroup;
 
 import com.google.firebase.database.FirebaseDatabase;
 
-import Dominio.modelo.Fecha;
+import mobile20171c.utnapp.Modelo.Fecha;
+import mobile20171c.utnapp.DatePickerFragment;
+import mobile20171c.utnapp.FechaFragment;
+import mobile20171c.utnapp.R;
+import mobile20171c.utnapp.Recycler.FechaRecyclerAdapter;
 
 public class CursoFechaFragment extends Fragment {
 

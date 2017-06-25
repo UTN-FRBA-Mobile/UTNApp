@@ -1,4 +1,4 @@
-package mobile20171c.utnapp;
+package mobile20171c.utnapp.Cursos;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,10 +22,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import Dominio.modelo.Curso;
+import mobile20171c.utnapp.Modelo.Curso;
+import mobile20171c.utnapp.R;
 
 
 /**

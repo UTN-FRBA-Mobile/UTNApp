@@ -1,4 +1,4 @@
-package Dominio.modelo;
+package mobile20171c.utnapp.Modelo;
 
 public class Curso {
 

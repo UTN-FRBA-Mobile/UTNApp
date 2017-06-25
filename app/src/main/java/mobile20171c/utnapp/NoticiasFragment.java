@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import mobile20171c.utnapp.Recycler.NoticiasRecyclerAdapter;
+
 
 /**
  * A simple {@link Fragment} subclass.

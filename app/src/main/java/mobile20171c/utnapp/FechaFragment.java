@@ -14,7 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-import Dominio.modelo.Fecha;
+import mobile20171c.utnapp.Modelo.Fecha;
+import mobile20171c.utnapp.Recycler.FechaRecyclerAdapter;
 
 public class FechaFragment extends Fragment {
 

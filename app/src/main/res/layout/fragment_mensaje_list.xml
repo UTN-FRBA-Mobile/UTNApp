@@ -14,7 +14,7 @@
         android:layout_marginRight="16dp"
         android:layout_alignParentTop="true"
         android:layout_above="@+id/nuevoMensaje"
-        tools:context="mobile20171c.utnapp.CursoMensajeFragment"
+        tools:context="mobile20171c.utnapp.Cursos.CursoMensajeFragment"
         tools:listitem="@layout/mensajes_item"
         />
 
