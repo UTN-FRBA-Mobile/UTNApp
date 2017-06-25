@@ -97,6 +97,8 @@ public class NuevoCursoFragment extends Fragment {
                     return;
                 }
 
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
                 // creamos el curso
                 Curso curso = new Curso();
                 curso.materia = materia;
@@ -104,6 +106,7 @@ public class NuevoCursoFragment extends Fragment {
                 curso.profesor = profesor;
                 curso.sede = sede;
                 curso.aula = aula;
+                curso.adminUserId = user.getUid();
 
                 DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
 
@@ -114,8 +117,6 @@ public class NuevoCursoFragment extends Fragment {
                 dbRef.child("cursos").child(key).setValue(curso);
 
                 // se lo asignamos al usuario actual
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
                 dbRef.child("usuarios").child(user.getUid()).child("cursos").child(key).setValue(curso);
 
                 // TODO: cambiar el fragment

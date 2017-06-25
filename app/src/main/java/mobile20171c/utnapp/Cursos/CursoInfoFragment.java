@@ -69,7 +69,7 @@ public class CursoInfoFragment extends Fragment {
                 .addListenerForSingleValueEvent(new CursoValueEventListener(view));
     }
 
-    public class CursoValueEventListener implements ValueEventListener {
+    private class CursoValueEventListener implements ValueEventListener {
 
         View view;
 

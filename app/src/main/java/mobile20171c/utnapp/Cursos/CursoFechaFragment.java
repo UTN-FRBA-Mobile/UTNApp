@@ -9,12 +9,19 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import mobile20171c.utnapp.Modelo.Curso;
 import mobile20171c.utnapp.Modelo.Fecha;
 import mobile20171c.utnapp.DatePickerFragment;
 import mobile20171c.utnapp.FechaFragment;
@@ -51,14 +58,12 @@ public class CursoFechaFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragment newFragment = DatePickerFragment.newInstance(idCurso);
-                newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
-            }
-        });
+
+
+        FirebaseDatabase.getInstance()
+                .getReference("cursos")
+                .child(idCurso)
+                .addListenerForSingleValueEvent(new CursoFechaValueEventListener(view));
 
         /* recycler */
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerFechas);
@@ -69,6 +74,44 @@ public class CursoFechaFragment extends Fragment {
         );
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private class CursoFechaValueEventListener implements ValueEventListener {
+
+        View view;
+
+        private CursoFechaValueEventListener(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void onDataChange(DataSnapshot snapshot) {
+            if (snapshot.exists()) {
+                Curso curso = snapshot.getValue(Curso.class);
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                if (user.getUid().equals(curso.adminUserId)) {
+                    // solo el admin puede agregar fechas
+                    FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+                    fab.setVisibility(View.VISIBLE);
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            DialogFragment newFragment = DatePickerFragment.newInstance(idCurso);
+                            newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+                        }
+                    });
+                }
+            } else {
+                Log.e("CursoValueEventListener", "Curso not found");
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Log.e("CursoValueEventListener", databaseError.toString());
+        }
     }
 
     @Override

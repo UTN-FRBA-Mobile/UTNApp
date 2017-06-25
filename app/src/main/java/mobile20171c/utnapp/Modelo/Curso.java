@@ -12,6 +12,8 @@ public class Curso {
 
     public String aula;
 
+    public String adminUserId;
+
     public String sede;
 
 }
