@@ -47,4 +47,5 @@
     <string name="cursos_fechas">Fechas</string>
     <string name="mensaje_hint">Mensaje...</string>
     <string name="enviar">Enviar</string>
+    <string name="cargando">Cargando...</string>
 </resources>

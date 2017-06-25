@@ -1,6 +1,8 @@
 package mobile20171c.utnapp.Cursos;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import mobile20171c.utnapp.Modelo.Mensaje;
 import mobile20171c.utnapp.R;
+import mobile20171c.utnapp.Recycler.CursosRecyclerAdapter;
 import mobile20171c.utnapp.Recycler.MensajesRecyclerAdapter;
 
 /**
@@ -33,6 +36,8 @@ public class CursoMensajeFragment extends Fragment {
     private static final String ARG_ID_CURSO = "CursoId";
     private String midCurso;
     private OnListFragmentInteractionListener mListener;
+    private ProgressDialog pr;
+    private MensajesRecyclerAdapter mRecyclerAdapter;
 
     public static CursoMensajeFragment newInstance(String idCurso) {
         CursoMensajeFragment fragment = new CursoMensajeFragment();
@@ -61,12 +66,10 @@ public class CursoMensajeFragment extends Fragment {
         /* recycler */
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewMensajes);
 
-        recyclerView.setAdapter(new MensajesRecyclerAdapter(
-                        FirebaseDatabase.getInstance().getReference().child("mensajes").child(midCurso)
-                )
-        );
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        new ObtenerMensajesDelCurso().execute(recyclerView);
 
         /* button */
         Button button = (Button) view.findViewById(R.id.buttonNuevoMensaje);
@@ -135,5 +138,34 @@ public class CursoMensajeFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(Mensaje mensaje);
+    }
+
+
+    private class ObtenerMensajesDelCurso extends AsyncTask<RecyclerView, Integer, RecyclerView> {
+
+        @Override
+        protected RecyclerView doInBackground(RecyclerView... params) {
+            mRecyclerAdapter = new MensajesRecyclerAdapter(
+                    FirebaseDatabase.getInstance().getReference().child("mensajes").child(midCurso)
+            );
+            return params[0];
+        }
+
+        @Override
+        protected void onPreExecute() {
+            pr = new ProgressDialog(getContext());
+            pr.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pr.setIndeterminate(true);
+            pr.setCancelable(false);
+            pr.setMessage(getResources().getText(R.string.cargando));
+            pr.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(RecyclerView result) {
+            result.setAdapter(mRecyclerAdapter);
+            pr.dismiss();
+        }
     }
 }
