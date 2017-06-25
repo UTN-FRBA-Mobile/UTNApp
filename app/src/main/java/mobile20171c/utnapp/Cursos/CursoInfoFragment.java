@@ -9,8 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,7 +24,7 @@ import mobile20171c.utnapp.R;
 
 public class CursoInfoFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "cursoId";
+    private static final String ARG_ID_CURSO = "cursoId";
 
     private OnFragmentInteractionListener mListener;
 
@@ -33,7 +36,7 @@ public class CursoInfoFragment extends Fragment {
     public static CursoInfoFragment newInstance(String idCurso) {
         CursoInfoFragment fragment = new CursoInfoFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, idCurso);
+        args.putString(ARG_ID_CURSO, idCurso);
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,8 +68,75 @@ public class CursoInfoFragment extends Fragment {
 
         FirebaseDatabase.getInstance()
                 .getReference("cursos")
-                .child(getArguments().getString(ARG_PARAM1))
+                .child(getArguments().getString(ARG_ID_CURSO))
                 .addListenerForSingleValueEvent(new CursoValueEventListener(view));
+
+        final Button btnCurso = (Button)view.findViewById(R.id.cursoEstadoBtn);
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        FirebaseDatabase.getInstance()
+                .getReference("usuarios")
+                .child(user.getUid())
+                .child("cursos")
+                .child(getArguments().getString(ARG_ID_CURSO))
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            btnCurso.setText("Abandonar este curso");
+
+                            btnCurso.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    FirebaseDatabase.getInstance()
+                                            .getReference("usuarios")
+                                            .child(user.getUid())
+                                            .child("cursos")
+                                            .child(getArguments().getString(ARG_ID_CURSO))
+                                            .removeValue();
+                                }
+                            });
+                        } else {
+                            btnCurso.setText("Anotarme a este curso");
+
+                            btnCurso.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    FirebaseDatabase.getInstance()
+                                            .getReference("cursos")
+                                            .child(getArguments().getString(ARG_ID_CURSO))
+                                            .addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                                @Override
+                                                public void onDataChange(DataSnapshot snapshot) {
+                                                    if (snapshot.exists()) {
+                                                        FirebaseDatabase.getInstance()
+                                                                .getReference("usuarios")
+                                                                .child(user.getUid())
+                                                                .child("cursos")
+                                                                .child(getArguments().getString(ARG_ID_CURSO))
+                                                                .setValue(snapshot.getValue(Curso.class));
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                }
+
+                                            });
+                                }
+                            });
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e("CursoValueEventListener", databaseError.toString());
+                    }
+                });
     }
 
     private class CursoValueEventListener implements ValueEventListener {
