@@ -1,228 +1,182 @@
-
 [
   {
-    "year": "2017",
-    "months": [
-      {
-        "month": "MARZO",
-        "events": [
-          {
-            "date": "13\/Marzo",
-            "day": "Lunes",
-            "text": "Comienzo de clases"
-          },
-          {
-            "date": "24\/Marzo",
-            "day": "Viernes",
-            "text": "Sin actividad - D\u00eda Nacional de la memoria por la Verdad y la Justicia"
-          }
-        ]
-      },
-      {
-        "month": "ABRIL",
-        "events": [
-          {
-            "date": "13 y 14 \/Abril",
-            "day": "Jue y Vie",
-            "text": "Sin Actividad - Jueves y Viernes Santo (Ley 21.329)"
-          },
-          {
-            "date": "24\/Abril al 2\/Mayo",
-            "day": "1 Semana",
-            "text": "Mesas especiales - Sin suspensi\u00f3n de clases"
-          }
-        ]
-      },
-      {
-        "month": "MAYO",
-        "events": [
-          {
-            "date": "1\/Mayo",
-            "day": "Lunes ",
-            "text": "Sin actividad - D\u00eda del Trabajador"
-          },
-          {
-            "date": "24 y 26\/Mayo",
-            "day": "Mie y Vie",
-            "text": "Turno de examen final - 1 llamado - No se dictar\u00e1n clases"
-          },
-          {
-            "date": "25\/Mayo",
-            "day": "Jueves",
-            "text": "Sin actividad - D\u00eda de la Revoluci\u00f3n de Mayo (Ley 21.329)"
-          }
-        ]
-      },
-      {
-        "month": "JUNIO",
-        "events": [
-          {
-            "date": "17\/Junio",
-            "day": "S\u00e1bado",
-            "text": "Sin actividad - D\u00eda Paso a la Inmortalidad del Gral. Martin G\u00fcemes (Ley 27258)"
-          },
-          {
-            "date": "20\/Junio",
-            "day": "Martes",
-            "text": "Sin actividad - D\u00eda Paso a la Inmortalidad del Gral. Manuel Belgrano (Ley 24.445)"
-          },
-          {
-            "date": "27\/Junio",
-            "day": "Martes",
-            "text": "Sin actividad - D\u00eda del Trabajador del Estado (Ley 26.876)"
-          }
-        ]
-      },
-      {
-        "month": "JULIO",
-        "events": [
-          {
-            "date": "8\/Julio",
-            "day": "S\u00e1bado",
-            "text": "Finalizaci\u00f3n del 1\u00b0 Cuatrimestre"
-          },
-          {
-            "date": "10 al 15\/Julio",
-            "day": "1 Semana",
-            "text": "Turno de ex\u00e1menes finales de Julio\/Agosto -1\u00b0 Llamado"
-          },
-          {
-            "date": "17 al 22\/Julio",
-            "day": "1 Semana",
-            "text": "Sin actividad - Vacaciones Invernales"
-          },
-          {
-            "date": "24 al 29\/Julio",
-            "day": "1 Semana",
-            "text": "Turno de ex\u00e1menes finales de Julio\/Agosto - 2\u00b0 Llamado"
-          },
-          {
-            "date": "29\/Julio",
-            "day": "S\u00e1bado",
-            "text": "\u00daltima fecha firma de TP asignaturas Cuatrimestrales"
-          },
-          {
-            "date": "31\/Julio",
-            "day": "Lunes",
-            "text": "Comienzo de clases Anuales"
-          }
-        ]
-      },
-      {
-        "month": "AGOSTO",
-        "events": [
-          {
-            "date": "7\/Agto",
-            "day": "Lunes",
-            "text": "Comienzo de clases Cuatrimestrales"
-          },
-          {
-            "date": "19 \/Agosto",
-            "day": "S\u00e1bado",
-            "text": "Sin Actividad - D\u00eda de la UTN"
-          },
-          {
-            "date": "21\/Agosto",
-            "day": "Lunes",
-            "text": "Sin Actividad - 17\/08 Paso a la Inmtlidad del Gral. Jos\u00e9 de San Mart\u00edn (Ley 24.445)"
-          }
-        ]
-      },
-      {
-        "month": "SEPTIEMBRE",
-        "events": [
-          {
-            "date": "21\/Sep.",
-            "day": "Jueves",
-            "text": "Sin actividad - D\u00eda del estudiante"
-          },
-          {
-            "date": "26 y 27 de Sep.",
-            "day": "Mar y Mie",
-            "text": "Turno de examen final - 1 llamado - No se dictar\u00e1n clases"
-          }
-        ]
-      },
-      {
-        "month": "OCTUBRE",
-        "events": [
-          {
-            "date": "23 al 31 de Oct.",
-            "day": "1 Semana",
-            "text": "Mesas especiales - Sin suspensi\u00f3n de clases"
-          },
-          {
-            "date": "16-oct",
-            "day": "Lunes",
-            "text": "Sin Actividad - 12\/10 D\u00eda del Respeto a la Diversidad Cultural"
-          }
-        ]
-      },
-      {
-        "month": "NOVIEMBRE",
-        "events": [
-          {
-            "date": "20\/Nov.",
-            "day": "Lunes",
-            "text": "Sin Actividad - 20\/11 D\u00eda de la Soberan\u00eda Nacional"
-          },
-          {
-            "date": "25-nov",
-            "day": "S\u00e1bado",
-            "text": "Finalizaci\u00f3n del 2\u00b0 Cuatrimestre"
-          }
-        ]
-      },
-      {
-        "month": "DICIEMBRE",
-        "events": [
-          {
-            "date": "1\/Dic al 22\/Dic",
-            "day": ".....",
-            "text": "Turno de ex\u00e1menes finales de Diciembre -3 llamados. No se dictar\u00e1n clases"
-          },
-          {
-            "date": "8\/Diciembre",
-            "day": "Viernes",
-            "text": "Sin actividad - D\u00eda de la Inmaculada Concepci\u00f3n de la Virgen"
-          }
-        ]
-      }
-    ]
+    "type": "year",
+    "text": "2017"
   },
   {
-    "year": "2018",
-    "months": [
-      {
-        "month": "ENERO",
-        "events": [
-          {
-            "date": "1 al 26\/Enero",
-            "day": "......",
-            "text": "Receso de Actividades"
-          },
-          {
-            "date": "29\/Enero",
-            "day": "Lunes",
-            "text": "Inicio Curso seminario Universitario 2018"
-          }
-        ]
-      },
-      {
-        "month": "MARZO",
-        "events": [
-          {
-            "date": "5\/Feb. 1\/Marzo",
-            "day": "3 Semanas",
-            "text": "Turno de ex\u00e1menes finales Febrero\/Marzo - 3 llamados"
-          },
-          {
-            "date": "1\/Marzo",
-            "day": "Mi\u00e9rcoles",
-            "text": "\u00daltima fecha firma de TP asignaturas Cuatrimestrales y Anuales"
-          }
-        ]
-      }
-    ]
+    "type": "month",
+    "text": "MARZO"
+  },
+  {
+    "type": "day",
+    "text": "13\/Marzo - Comienzo de clases"
+  },
+  {
+    "type": "day",
+    "text": "24\/Marzo - Sin actividad - D\u00eda Nacional de la memoria por la Verdad y la Justicia"
+  },
+  {
+    "type": "month",
+    "text": "ABRIL"
+  },
+  {
+    "type": "day",
+    "text": "13 y 14 \/Abril - Sin Actividad - Jueves y Viernes Santo (Ley 21.329)"
+  },
+  {
+    "type": "day",
+    "text": "24\/Abril al 2\/Mayo - Mesas especiales - Sin suspensi\u00f3n de clases"
+  },
+  {
+    "type": "month",
+    "text": "MAYO"
+  },
+  {
+    "type": "day",
+    "text": "1\/Mayo - Sin actividad - D\u00eda del Trabajador"
+  },
+  {
+    "type": "day",
+    "text": "24 y 26\/Mayo - Turno de examen final - 1 llamado - No se dictar\u00e1n clases"
+  },
+  {
+    "type": "day",
+    "text": "25\/Mayo - Sin actividad - D\u00eda de la Revoluci\u00f3n de Mayo (Ley 21.329)"
+  },
+  {
+    "type": "month",
+    "text": "JUNIO"
+  },
+  {
+    "type": "day",
+    "text": "17\/Junio - Sin actividad - D\u00eda Paso a la Inmortalidad del Gral. Martin G\u00fcemes (Ley 27258)"
+  },
+  {
+    "type": "day",
+    "text": "20\/Junio - Sin actividad - D\u00eda Paso a la Inmortalidad del Gral. Manuel Belgrano (Ley 24.445)"
+  },
+  {
+    "type": "day",
+    "text": "27\/Junio - Sin actividad - D\u00eda del Trabajador del Estado (Ley 26.876)"
+  },
+  {
+    "type": "month",
+    "text": "JULIO"
+  },
+  {
+    "type": "day",
+    "text": "8\/Julio - Finalizaci\u00f3n del 1\u00b0 Cuatrimestre"
+  },
+  {
+    "type": "day",
+    "text": "10 al 15\/Julio - Turno de ex\u00e1menes finales de Julio\/Agosto -1\u00b0 Llamado"
+  },
+  {
+    "type": "day",
+    "text": "17 al 22\/Julio - Sin actividad - Vacaciones Invernales"
+  },
+  {
+    "type": "day",
+    "text": "24 al 29\/Julio - Turno de ex\u00e1menes finales de Julio\/Agosto - 2\u00b0 Llamado"
+  },
+  {
+    "type": "day",
+    "text": "29\/Julio - \u00daltima fecha firma de TP asignaturas Cuatrimestrales"
+  },
+  {
+    "type": "day",
+    "text": "31\/Julio - Comienzo de clases Anuales"
+  },
+  {
+    "type": "month",
+    "text": "AGOSTO"
+  },
+  {
+    "type": "day",
+    "text": "7\/Agto - Comienzo de clases Cuatrimestrales"
+  },
+  {
+    "type": "day",
+    "text": "19 \/Agosto - Sin Actividad - D\u00eda de la UTN"
+  },
+  {
+    "type": "day",
+    "text": "21\/Agosto - Sin Actividad - 17\/08 Paso a la Inmtlidad del Gral. Jos\u00e9 de San Mart\u00edn (Ley 24.445)"
+  },
+  {
+    "type": "month",
+    "text": "SEPTIEMBRE"
+  },
+  {
+    "type": "day",
+    "text": "21\/Sep. - Sin actividad - D\u00eda del estudiante"
+  },
+  {
+    "type": "day",
+    "text": "26 y 27 de Sep. - Turno de examen final - 1 llamado - No se dictar\u00e1n clases"
+  },
+  {
+    "type": "month",
+    "text": "OCTUBRE"
+  },
+  {
+    "type": "day",
+    "text": "23 al 31 de Oct. - Mesas especiales - Sin suspensi\u00f3n de clases"
+  },
+  {
+    "type": "day",
+    "text": "16-oct - Sin Actividad - 12\/10 D\u00eda del Respeto a la Diversidad Cultural"
+  },
+  {
+    "type": "month",
+    "text": "NOVIEMBRE"
+  },
+  {
+    "type": "day",
+    "text": "20\/Nov. - Sin Actividad - 20\/11 D\u00eda de la Soberan\u00eda Nacional"
+  },
+  {
+    "type": "day",
+    "text": "25-nov - Finalizaci\u00f3n del 2\u00b0 Cuatrimestre"
+  },
+  {
+    "type": "month",
+    "text": "DICIEMBRE"
+  },
+  {
+    "type": "day",
+    "text": "1\/Dic al 22\/Dic - Turno de ex\u00e1menes finales de Diciembre -3 llamados. No se dictar\u00e1n clases"
+  },
+  {
+    "type": "day",
+    "text": "8\/Diciembre - Sin actividad - D\u00eda de la Inmaculada Concepci\u00f3n de la Virgen"
+  },
+  {
+    "type": "year",
+    "text": "2018"
+  },
+  {
+    "type": "month",
+    "text": "ENERO"
+  },
+  {
+    "type": "day",
+    "text": "1 al 26\/Enero - Receso de Actividades"
+  },
+  {
+    "type": "day",
+    "text": "29\/Enero - Inicio Curso seminario Universitario 2018"
+  },
+  {
+    "type": "month",
+    "text": "MARZO"
+  },
+  {
+    "type": "day",
+    "text": "5\/Feb. 1\/Marzo - Turno de ex\u00e1menes finales Febrero\/Marzo - 3 llamados"
+  },
+  {
+    "type": "day",
+    "text": "1\/Marzo - \u00daltima fecha firma de TP asignaturas Cuatrimestrales y Anuales"
   }
 ]

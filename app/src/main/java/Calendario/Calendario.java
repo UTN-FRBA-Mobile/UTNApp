@@ -7,11 +7,11 @@ import java.io.InputStream;
 
 public class Calendario {
 
-    public Year[] years;
+    public Item[] items;
 
     public static Calendario getInstanceFromAsset(InputStream jsonFile) {
         Calendario calendario = new Calendario();
-        calendario.years = new Gson().fromJson(getJsonString(jsonFile), Year[].class);
+        calendario.items = new Gson().fromJson(getJsonString(jsonFile), Item[].class);
 
         return calendario;
     }
