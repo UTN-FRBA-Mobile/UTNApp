@@ -6,13 +6,23 @@
     android:layout_weight="1"
     tools:context="mobile20171c.utnapp.ConfiguracionFragment">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="168dp"
+            tools:layout_editor_absoluteY="177dp" />
+
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imgUsr"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         app:srcCompat="@android:drawable/ic_menu_gallery" />
@@ -33,7 +43,7 @@
                 app:srcCompat="@drawable/ic_menu_camera" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/btnGaleria"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -61,5 +71,13 @@
             android:id="@+id/editTextNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnGuardar"
+            android:text="@string/guardarPerfil"/>
     </LinearLayout>
+
+
 </ScrollView>
