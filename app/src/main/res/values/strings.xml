@@ -51,4 +51,5 @@
     <string name="permisoRequerido">Permisos requeridos faltantes</string>
     <string name="guardarPerfil">Guardar perfil</string>
     <string name="errorUsuario">Error al cargar los datos del usuario</string>
+    <string name="errorFoto">Error al almacenar la foto</string>
 </resources>

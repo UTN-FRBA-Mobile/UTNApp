@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -27,12 +28,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -62,6 +68,8 @@ public class ConfiguracionFragment extends Fragment {
 
     String currentPhotoPath;
     private ImageView selectedImageView;
+
+    String fotoURL;
 
     private Handler handler = new Handler();
 
@@ -236,6 +244,65 @@ public class ConfiguracionFragment extends Fragment {
     }
 
     private void guardarCambiosEnPerfil() {
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if(fotoURL == null || fotoURL == ""){
+            Uri file = Uri.fromFile(new File(currentPhotoPath));
+            String nombreArchivo = mAuth.getCurrentUser().getUid() + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+
+            storageRef.child(nombreArchivo).putFile(file)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(getContext(),"Archivo subido",Toast.LENGTH_LONG).show();
+                            @SuppressWarnings("VisibleForTests")Uri uri = taskSnapshot.getDownloadUrl();
+
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            FirebaseDatabase.getInstance()
+                                        .getReference()
+                                        .child("usuarios")
+                                        .child(user.getUid())
+                                        .child("URLphoto")
+                                        .setValue(uri.toString());
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            Toast.makeText(getContext(),exception.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+        }
+
+        FirebaseDatabase.getInstance()
+                .getReference("usuarios")
+                .child(user.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            String nombre = ((EditText) getView().findViewById(R.id.editTextNombre)).getText().toString();
+
+                            FirebaseDatabase.getInstance()
+                                    .getReference("usuarios")
+                                    .child(user.getUid())
+                                    .child("nombre")
+                                    .setValue(nombre);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e("guardarCambiosEnPerfil", databaseError.toString());
+                    }
+                });
     }
 
     private void downloadFromUrl(String urlString) {
