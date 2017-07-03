@@ -23,6 +23,10 @@ import mobile20171c.utnapp.Recycler.CursosRecyclerAdapter;
 
 public class CursosFragment extends Fragment {
 
+    private static final String ARG_ID_CURSO = "CursoId";
+
+    private String cursoId;
+
     private CursosRecyclerAdapter misCursosRecycler;
     private CursosRecyclerAdapter todosLosCursosRecycler;
 
@@ -32,6 +36,23 @@ public class CursosFragment extends Fragment {
 
     public static CursosFragment newInstance() {
         return new CursosFragment();
+    }
+
+    public static CursosFragment newInstanceMsg(String cursoId) {
+        CursosFragment fragment = new CursosFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_ID_CURSO, cursoId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            cursoId = getArguments().getString(ARG_ID_CURSO);
+        }
     }
 
     @Override
@@ -102,6 +123,13 @@ public class CursosFragment extends Fragment {
 
             }
         });
+
+        if (cursoId != null) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, CursoFragment.newInstanceMsg(cursoId), "Fragment")
+                    .addToBackStack("Curso")
+                    .commit();
+        }
     }
 
 }

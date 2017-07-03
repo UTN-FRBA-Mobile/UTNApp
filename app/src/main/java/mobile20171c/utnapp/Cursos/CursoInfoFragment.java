@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import mobile20171c.utnapp.Modelo.Curso;
 import mobile20171c.utnapp.R;
@@ -89,6 +90,11 @@ public class CursoInfoFragment extends Fragment {
                             btnCurso.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+
+                                    Log.d("FIREBASE_TOPIC", "unsubscribe curso-"+getArguments().getString(ARG_ID_CURSO));
+
+                                    FirebaseMessaging.getInstance().unsubscribeFromTopic("curso-"+getArguments().getString(ARG_ID_CURSO));
+
                                     FirebaseDatabase.getInstance()
                                             .getReference("usuarios")
                                             .child(user.getUid())
@@ -112,6 +118,11 @@ public class CursoInfoFragment extends Fragment {
                                                 @Override
                                                 public void onDataChange(DataSnapshot snapshot) {
                                                     if (snapshot.exists()) {
+
+                                                        Log.d("FIREBASE_TOPIC", "subscribe curso-"+getArguments().getString(ARG_ID_CURSO));
+
+                                                        FirebaseMessaging.getInstance().subscribeToTopic("curso-"+getArguments().getString(ARG_ID_CURSO));
+
                                                         FirebaseDatabase.getInstance()
                                                                 .getReference("usuarios")
                                                                 .child(user.getUid())

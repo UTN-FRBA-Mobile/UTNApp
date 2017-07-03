@@ -15,18 +15,35 @@ import mobile20171c.utnapp.R;
 
 public class CursoFragment extends Fragment implements MainActivity.getAppTitleListener {
 
+    private static final String ARG_ID_CURSO = "CursoId";
+    private static final String ARG_ID_SHOW_MSG = "showMsg";
+
     private String cursoId;
+    private Boolean showMsg;
 
     public CursoFragment() {
         // Required empty public constructor
     }
 
     public static CursoFragment newInstance(String cursoId) {
-
         CursoFragment fragment = new CursoFragment();
 
         Bundle args = new Bundle();
-        args.putString("cursoId", cursoId);
+        args.putString(ARG_ID_CURSO, cursoId);
+        args.putBoolean(ARG_ID_SHOW_MSG, false);
+
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+    public static CursoFragment newInstanceMsg(String cursoId) {
+        CursoFragment fragment = new CursoFragment();
+
+        Bundle args = new Bundle();
+        args.putString(ARG_ID_CURSO, cursoId);
+        args.putBoolean(ARG_ID_SHOW_MSG, true);
+
         fragment.setArguments(args);
 
         return fragment;
@@ -42,7 +59,8 @@ public class CursoFragment extends Fragment implements MainActivity.getAppTitleL
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.cursoId = getArguments().getString("cursoId");
+        this.cursoId = getArguments().getString(ARG_ID_CURSO);
+        this.showMsg = getArguments().getBoolean(ARG_ID_SHOW_MSG);
     }
 
     @Override
@@ -88,9 +106,13 @@ public class CursoFragment extends Fragment implements MainActivity.getAppTitleL
                 }
             });
 
-            Fragment childFragment = CursoInfoFragment.newInstance(this.cursoId);
-            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-            transaction.replace(R.id.child_fragment_container, childFragment).commit();
+
+            if (showMsg) {
+                tabs.getTabAt(1).select();
+            } else {
+                tabs.getTabAt(0).select();
+            }
+
         }
         catch (RuntimeException ex){
             Toast.makeText(this.getContext(),ex.getMessage(),

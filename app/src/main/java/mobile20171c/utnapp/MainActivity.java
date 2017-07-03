@@ -67,9 +67,19 @@ public class MainActivity extends AppCompatActivity
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, CursosFragment.newInstance(), "Fragment")
-                .commit();
+        Intent intent = getIntent();
+
+        if (intent.getStringExtra("mensajesCurso") != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, CursosFragment.newInstanceMsg(intent.getStringExtra("mensajesCurso")), "Fragment")
+                    .commit();
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, CursosFragment.newInstance(), "Fragment")
+                    .commit();
+        }
+
+
     }
 
     public void onBackStackChanged() {
@@ -121,11 +131,14 @@ public class MainActivity extends AppCompatActivity
         ref.child("usuarios").child(user.getUid()).child("nombre").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                TextView tvNombreUsuario = (TextView) findViewById(R.id.userFullNameTextView);
 
-                String nombre = dataSnapshot.getValue(String.class);
+                if (dataSnapshot.exists()) {
+                    TextView tvNombreUsuario = (TextView) findViewById(R.id.userFullNameTextView);
 
-                tvNombreUsuario.setText(nombre);
+                    String nombre = dataSnapshot.getValue(String.class);
+
+                    tvNombreUsuario.setText(nombre);
+                }
             }
 
             @Override
