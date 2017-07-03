@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,7 @@ public class CursoFragment extends Fragment implements MainActivity.getAppTitleL
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
                     FragmentTransaction transaction;
+
                     switch (tab.getPosition()){
                         case 0:
                             transaction = getChildFragmentManager().beginTransaction();
@@ -108,9 +110,13 @@ public class CursoFragment extends Fragment implements MainActivity.getAppTitleL
 
 
             if (showMsg) {
-                tabs.getTabAt(1).select();
+                getChildFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.child_fragment_container, CursoMensajeFragment.newInstance(cursoId)).commit();
             } else {
-                tabs.getTabAt(0).select();
+                getChildFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.child_fragment_container, CursoInfoFragment.newInstance(cursoId)).commit();
             }
 
         }
