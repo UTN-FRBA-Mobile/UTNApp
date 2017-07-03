@@ -132,8 +132,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.exists()) {
-                    TextView tvNombreUsuario = (TextView) findViewById(R.id.userFullNameTextView);
+                TextView tvNombreUsuario = (TextView) findViewById(R.id.userFullNameTextView);
+
+                if (dataSnapshot.exists() && tvNombreUsuario != null) {
 
                     String nombre = dataSnapshot.getValue(String.class);
 
