@@ -1,7 +1,11 @@
 package mobile20171c.utnapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -12,17 +16,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import Helpers.ImageLoader;
+import Helpers.UrlRequest;
 import mobile20171c.utnapp.Cursos.CursosFragment;
+import mobile20171c.utnapp.Modelo.Usuario;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, android.support.v4.app.FragmentManager.OnBackStackChangedListener {
 
     private FirebaseAuth mAuth;
+
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,12 +112,31 @@ public class MainActivity extends AppCompatActivity
 
         FirebaseUser user = mAuth.getCurrentUser();
         View headerLayout = ((NavigationView)findViewById(R.id.nav_view)).getHeaderView(0);
-        TextView tvEmailUsuario = (TextView) headerLayout.findViewById(R.id.userMailTextView);
-        TextView tvNombreUsuario = (TextView) headerLayout.findViewById(R.id.userFullNameTextView);
 
+        TextView tvEmailUsuario = (TextView) headerLayout.findViewById(R.id.userMailTextView);
         tvEmailUsuario.setText(user.getEmail());
-        tvNombreUsuario.setText(user.getDisplayName());
-        //TODO: Setear la imagen del usuario al cargar el main activity
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+        ref.child("usuarios").child(user.getUid()).child("nombre").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                TextView tvNombreUsuario = (TextView) findViewById(R.id.userFullNameTextView);
+
+                String nombre = dataSnapshot.getValue(String.class);
+
+                tvNombreUsuario.setText(nombre);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void setImagenUsuario() {
+
     }
 
     @Override
@@ -164,5 +206,29 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void downloadFromUrl(String urlString) {
+        URL url = null;
+        try {
+            url = new URL(urlString);
+        } catch (MalformedURLException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        ImageLoader.instance.execute(UrlRequest.makeRequest(url, new UrlRequest.Listener() {
+            @Override
+            public void onReceivedBody(int responseCode, byte body[]) {
+                final Bitmap bitmap = BitmapFactory.decodeByteArray(body, 0, body.length);
+                ImageView ivFotoUsuario = (ImageView) findViewById(R.id.userFotoImageView);
+                ivFotoUsuario.setImageBitmap(bitmap);
+                }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        }));
     }
 }

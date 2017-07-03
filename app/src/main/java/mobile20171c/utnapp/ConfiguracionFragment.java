@@ -100,10 +100,8 @@ public class ConfiguracionFragment extends Fragment {
         FirebaseUser user = mAuth.getCurrentUser();
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
-        EditText etEmail = (EditText) view.findViewById(R.id.editTextEmail);
         EditText etNombre = (EditText) view.findViewById(R.id.editTextNombre);
 
-        etEmail.setText(user.getEmail());
         etNombre.setText(user.getDisplayName());
 
         ImageButton btnGaleria = (ImageButton) view.findViewById(R.id.btnGaleria);
@@ -215,6 +213,7 @@ public class ConfiguracionFragment extends Fragment {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         gallery.setType("image/*");
         startActivityForResult(gallery, REQUEST_PICK_IMAGE);
+        fotoURL = null;
     }
 
     public static void grantPermissionsToUri(Context context, Intent intent, Uri uri) {
@@ -240,6 +239,7 @@ public class ConfiguracionFragment extends Fragment {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
+            fotoURL = null;
         }
     }
 
@@ -256,7 +256,6 @@ public class ConfiguracionFragment extends Fragment {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(getContext(),"Archivo subido",Toast.LENGTH_LONG).show();
                             @SuppressWarnings("VisibleForTests")Uri uri = taskSnapshot.getDownloadUrl();
 
                             FirebaseUser user = mAuth.getCurrentUser();
@@ -267,6 +266,9 @@ public class ConfiguracionFragment extends Fragment {
                                         .child(user.getUid())
                                         .child("URLphoto")
                                         .setValue(uri.toString());
+
+                            Toast.makeText(getContext(),R.string.imagenSubidaOK,Toast.LENGTH_LONG).show();
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -308,6 +310,7 @@ public class ConfiguracionFragment extends Fragment {
     private void downloadFromUrl(String urlString) {
         URL url = null;
         try {
+            fotoURL = urlString;
             url = new URL(urlString);
         } catch (MalformedURLException e) {
             Toast.makeText(this.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
