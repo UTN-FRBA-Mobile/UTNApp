@@ -247,7 +247,7 @@ public class ConfiguracionFragment extends Fragment {
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        if(fotoURL != null && !fotoURL.equals("")){
+        if((fotoURL == null || fotoURL.equals("")) && currentPhotoPath != null) {
             Uri file = Uri.fromFile(new File(currentPhotoPath));
             String nombreArchivo = mAuth.getCurrentUser().getUid() + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             StorageReference storageRef = FirebaseStorage.getInstance().getReference();
