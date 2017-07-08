@@ -38,10 +38,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private static final int RC_SIGN_IN = 9001;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
     private View mProgressView;
-    private View mLoginFormView;
+    private View mViewGroup;
 
 
     private void AbrirMainActivity(){
@@ -81,7 +79,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         findViewById(R.id.btnIngresoGoogle).setOnClickListener(this);
         findViewById(R.id.btnIngresoMail).setOnClickListener(this);
         findViewById(R.id.btnRegistroMail).setOnClickListener(this);
+        findViewById(R.id.btnEmail).setOnClickListener(this);
         mProgressView = findViewById(R.id.login_progress);
+        mViewGroup = findViewById(R.id.lytDatos);
 
     }
 
@@ -138,6 +138,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         String password = ((TextView) findViewById(R.id.password)).getText().toString();
 
         switch (v.getId()) {
+
+            case R.id.btnEmail:
+                MostrarPanelDatos();
+                break;
             case R.id.btnIngresoGoogle:
                 IngresarConGoogle();
                 break;
@@ -158,6 +162,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 }
                 break;
         }
+    }
+
+    private void MostrarPanelDatos() {
+        mViewGroup.setVisibility(View.VISIBLE);
     }
 
     @Override
