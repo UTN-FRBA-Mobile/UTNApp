@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,7 +100,6 @@ public class ConfiguracionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         FirebaseUser user = mAuth.getCurrentUser();
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-
         EditText etNombre = (EditText) view.findViewById(R.id.editTextNombre);
 
         etNombre.setText(user.getDisplayName());
@@ -248,6 +248,12 @@ public class ConfiguracionFragment extends Fragment {
         FirebaseUser user = mAuth.getCurrentUser();
 
         if((fotoURL == null || fotoURL.equals("")) && currentPhotoPath != null) {
+
+            getView().findViewById(R.id.btnCamara).setEnabled(false);
+            progressBar.setVisibility(View.VISIBLE);
+            Toast.makeText(getContext(),R.string.guardandoPerfil,Toast.LENGTH_SHORT).show();
+
+
             Uri file = Uri.fromFile(new File(currentPhotoPath));
             String nombreArchivo = mAuth.getCurrentUser().getUid() + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             StorageReference storageRef = FirebaseStorage.getInstance().getReference();
@@ -267,8 +273,9 @@ public class ConfiguracionFragment extends Fragment {
                                         .child("URLphoto")
                                         .setValue(uri.toString());
 
-                            Toast.makeText(getContext(),R.string.imagenSubidaOK,Toast.LENGTH_LONG).show();
 
+                            progressBar.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getContext(),R.string.imagenSubidaOK,Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

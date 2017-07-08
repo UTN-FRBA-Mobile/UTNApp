@@ -54,4 +54,5 @@
     <string name="errorFoto">Error al almacenar la foto</string>
     <string name="perfilActualizadoOK">Perfil actualizado correctamente</string>
     <string name="imagenSubidaOK">La imagen se ha cargado correctamente</string>
+    <string name="guardandoPerfil">Guardando perfil de usuario</string>
 </resources>
