@@ -81,6 +81,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         findViewById(R.id.btnIngresoGoogle).setOnClickListener(this);
         findViewById(R.id.btnIngresoMail).setOnClickListener(this);
         findViewById(R.id.btnRegistroMail).setOnClickListener(this);
+        mProgressView = findViewById(R.id.login_progress);
+
     }
 
     @Override
@@ -96,6 +98,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void Ingresar(String email, String password) {
+
+        mProgressView.setVisibility(View.VISIBLE);
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -104,12 +109,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         if (!task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, R.string.usuarioInvalido,
                                     Toast.LENGTH_SHORT).show();
+                            mProgressView.setVisibility(View.INVISIBLE);
                         }
                     }
                 });
     }
 
     public void Crear(String email, String password) {
+
+        mProgressView.setVisibility(View.VISIBLE);
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -118,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Toast.makeText(LoginActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
                         }
+                        mProgressView.setVisibility(View.INVISIBLE);
                     }
                 });
     }
@@ -156,6 +166,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void IngresarConGoogle() {
+        mProgressView.setVisibility(View.VISIBLE);
+
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
