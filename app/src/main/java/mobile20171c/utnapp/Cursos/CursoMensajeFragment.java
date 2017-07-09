@@ -76,12 +76,16 @@ public class CursoMensajeFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                String contenido = ((EditText) v.getRootView().findViewById(R.id.nuevoMensaje)).getText().toString();
+
+                EditText txtMensaje = (EditText) v.getRootView().findViewById(R.id.nuevoMensaje);
+                String contenido = txtMensaje.getText().toString();
 
                 if (contenido.equals("")) {
                     Toast.makeText(v.getContext(), "Completa el mensaje.", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                txtMensaje.getText().clear();
 
                 // se lo asignamos al usuario actual
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
