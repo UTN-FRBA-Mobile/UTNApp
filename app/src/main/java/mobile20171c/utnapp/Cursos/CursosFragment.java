@@ -11,6 +11,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
 import mobile20171c.utnapp.R;
 import mobile20171c.utnapp.Recycler.CursosRecyclerAdapter;
 
@@ -31,8 +34,12 @@ public class CursosFragment extends Fragment implements SearchView.OnQueryTextLi
 
     private String cursoId;
 
+    private RecyclerView recyclerCursos;
+
     private CursosRecyclerAdapter misCursosRecycler;
     private CursosRecyclerAdapter todosLosCursosRecycler;
+
+    private boolean misCursosTabActive;
 
     public CursosFragment() {
         // Required empty public constructor
@@ -92,7 +99,7 @@ public class CursosFragment extends Fragment implements SearchView.OnQueryTextLi
         });
 
 
-        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewCursos);
+        final RecyclerView recyclerView = recyclerCursos = (RecyclerView) view.findViewById(R.id.recyclerViewCursos);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -105,6 +112,8 @@ public class CursosFragment extends Fragment implements SearchView.OnQueryTextLi
                 getContext(),
                 FirebaseDatabase.getInstance().getReference().child("cursos")
         );
+
+        misCursosTabActive = true;
 
         recyclerView.setAdapter(misCursosRecycler);
 
@@ -121,10 +130,12 @@ public class CursosFragment extends Fragment implements SearchView.OnQueryTextLi
                     case 0:
                         // mis cursos
                         recyclerView.setAdapter(misCursosRecycler);
+                        misCursosTabActive = true;
                         break;
                     case 1:
                         // todos los cursos
                         recyclerView.setAdapter(todosLosCursosRecycler);
+                        misCursosTabActive = false;
                         break;
                 }
             }
@@ -150,12 +161,39 @@ public class CursosFragment extends Fragment implements SearchView.OnQueryTextLi
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        Toast.makeText(this.getContext(), "Submit", Toast.LENGTH_SHORT).show();
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        CursosRecyclerAdapter adapter;
+
+        if (newText.equals("")) {
+            recyclerCursos.setAdapter(misCursosTabActive ? misCursosRecycler : todosLosCursosRecycler);
+
+            return false;
+        }
+
+        if (misCursosTabActive) {
+            Query query = FirebaseDatabase.getInstance().getReference().child("usuarios").child(user.getUid()).child("cursos")
+                            .orderByChild("materia").startAt(newText).endAt(newText+"\uf8ff");
+
+            adapter = new CursosRecyclerAdapter(
+                    getContext(),
+                    query
+            );
+        } else {
+            Query query = FirebaseDatabase.getInstance().getReference().child("cursos")
+                                .orderByChild("materia").startAt(newText).endAt(newText+"\uf8ff");
+            adapter = new CursosRecyclerAdapter(
+                    getContext(),
+                    query
+            );
+        }
+
+        recyclerCursos.setAdapter(adapter);
 
         return false;
     }
