@@ -56,4 +56,5 @@
     <string name="imagenSubidaOK">La imagen se ha cargado correctamente</string>
     <string name="guardandoPerfil">Guardando perfil de usuario</string>
     <string name="loginEmail">Acceder</string>
+    <string name="filtrarCursos">Filtrar cursos</string>
 </resources>

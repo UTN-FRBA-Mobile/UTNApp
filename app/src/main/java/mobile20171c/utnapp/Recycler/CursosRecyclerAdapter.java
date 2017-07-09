@@ -6,10 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
-
 import mobile20171c.utnapp.Modelo.Curso;
 import mobile20171c.utnapp.Cursos.CursoFragment;
 import mobile20171c.utnapp.R;
@@ -20,7 +18,6 @@ public class CursosRecyclerAdapter extends FirebaseRecyclerAdapter<Curso, Cursos
 
     public CursosRecyclerAdapter(Context context, DatabaseReference ref) {
         super(Curso.class, R.layout.cursos_item, CursosRecyclerAdapter.CursosViewHolder.class, ref);
-
         fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
     }
 
@@ -64,5 +61,4 @@ public class CursosRecyclerAdapter extends FirebaseRecyclerAdapter<Curso, Cursos
                     .commit();
         }
     }
-
 }

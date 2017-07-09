@@ -1,27 +1,31 @@
 package mobile20171c.utnapp.Cursos;
 
+import android.app.SearchableInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-
 import mobile20171c.utnapp.R;
 import mobile20171c.utnapp.Recycler.CursosRecyclerAdapter;
 
 
-public class CursosFragment extends Fragment {
+public class CursosFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     private static final String ARG_ID_CURSO = "CursoId";
 
@@ -53,12 +57,23 @@ public class CursosFragment extends Fragment {
         if (getArguments() != null) {
             cursoId = getArguments().getString(ARG_ID_CURSO);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_cursos, container, false);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        menuItem.setVisible(true);
+
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
     }
 
     @Override
@@ -75,6 +90,7 @@ public class CursosFragment extends Fragment {
                         .commit();
             }
         });
+
 
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewCursos);
 
@@ -132,4 +148,15 @@ public class CursosFragment extends Fragment {
         }
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        Toast.makeText(this.getContext(), "Submit", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        return false;
+    }
 }
