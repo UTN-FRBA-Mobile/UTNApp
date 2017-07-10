@@ -161,39 +161,42 @@ public class CursosFragment extends Fragment implements SearchView.OnQueryTextLi
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        CursosRecyclerAdapter adapter;
+
+        if (misCursosTabActive) {
+            Query consulta = FirebaseDatabase.getInstance().getReference().child("usuarios").child(user.getUid()).child("cursos")
+                    .orderByChild("materia").startAt(query).endAt(query+"\uf8ff");
+
+            adapter = new CursosRecyclerAdapter(
+                    getContext(),
+                    consulta
+            );
+        } else {
+            Query consulta = FirebaseDatabase.getInstance().getReference().child("cursos")
+                    .orderByChild("materia").startAt(query).endAt(query+"\uf8ff");
+            adapter = new CursosRecyclerAdapter(
+                    getContext(),
+                    consulta
+            );
+        }
+
+        recyclerCursos.setAdapter(adapter);
+
+
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        CursosRecyclerAdapter adapter;
 
         if (newText.equals("")) {
             recyclerCursos.setAdapter(misCursosTabActive ? misCursosRecycler : todosLosCursosRecycler);
 
             return false;
         }
-
-        if (misCursosTabActive) {
-            Query query = FirebaseDatabase.getInstance().getReference().child("usuarios").child(user.getUid()).child("cursos")
-                            .orderByChild("materia").startAt(newText).endAt(newText+"\uf8ff");
-
-            adapter = new CursosRecyclerAdapter(
-                    getContext(),
-                    query
-            );
-        } else {
-            Query query = FirebaseDatabase.getInstance().getReference().child("cursos")
-                                .orderByChild("materia").startAt(newText).endAt(newText+"\uf8ff");
-            adapter = new CursosRecyclerAdapter(
-                    getContext(),
-                    query
-            );
-        }
-
-        recyclerCursos.setAdapter(adapter);
 
         return false;
     }
